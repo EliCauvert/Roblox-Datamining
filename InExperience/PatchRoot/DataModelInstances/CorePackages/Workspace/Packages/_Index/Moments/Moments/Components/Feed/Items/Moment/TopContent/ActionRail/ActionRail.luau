@@ -20,6 +20,7 @@ local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPrefer
 local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useCommentCapabilities)
 local FFlagMomentsActionRailNarrowWidthModule = require(Moments.Flags.FFlagMomentsActionRailNarrowWidth)
 local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
+local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
@@ -32,8 +33,8 @@ local UseCommentActionImpressionModule = require(script.Parent.useCommentActionI
 local ArrowThickToRight = BuilderIconsModule.Icon.ArrowThickToRight
 local SpeechBubbleAlignLeft = BuilderIconsModule.Icon.SpeechBubbleAlignLeft
 
-return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "ActionRail" ]]
-	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
+return ReactModule.memo(function(Frame) --[[ Line: 67 | Named "ActionRail" ]]
+	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Store = UseMomentResult.store
@@ -62,7 +63,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "ActionRail" ]]
 		UseCommentActionImpressionModule(NoComments and Frame.moment ~= nil)
 	end
 	local UseSignalStateResult3 = UseSignalStateFunction(MomentsPreferencesStoreModule.getFeedGlobalMute)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 129 ]]
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 130 ]]
 		-- upvalues: UseSignalStateResult3 (copy), MomentsPreferencesStoreModule (copy)
 		return {
 			isMuted = UseSignalStateResult3,
@@ -90,7 +91,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "ActionRail" ]]
 			countIsCapped = Comments ~= nil and Comments.countIsCapped == true,
 			animationRatio = AnimationRatio,
 			isDisabled = UseSignalStateResult1_1,
-			onActivated = function() --[[ Line: 156 ]]
+			onActivated = function() --[[ Line: 157 ]]
 				-- upvalues: UseSignalStateResult1_1 (copy), FeedItemId (copy), Frame (copy)
 				if not UseSignalStateResult1_1 and FeedItemId ~= nil and FeedItemId ~= "" and Frame.onOpenComments ~= nil then
 					Frame.onOpenComments()
@@ -121,6 +122,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "ActionRail" ]]
 			isDisabled = UseSignalStateResult1,
 			layoutOrder = NextOrder(),
 			moment = Frame.moment,
+			momentStore = if FFlagMomentsCreatorAnalyticsModule then Store else nil,
 			playbackVolume = UseMemoResult
 		})
 	end

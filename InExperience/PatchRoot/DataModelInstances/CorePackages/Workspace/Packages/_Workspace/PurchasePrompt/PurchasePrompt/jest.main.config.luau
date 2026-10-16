@@ -6,7 +6,8 @@ return {
 	testPathIgnorePatterns = {
 		"launchRobuxPackagePurchase",
 		"NativePurchaseFinishedConnector",
-		"Network.getPlayerOwns.test"
+		"Network.getPlayerOwns.test",
+		"ProductPurchaseContainerGameplayPaused"
 	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.UIBloxInitializer,

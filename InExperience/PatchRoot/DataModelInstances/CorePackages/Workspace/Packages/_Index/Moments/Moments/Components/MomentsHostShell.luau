@@ -13,9 +13,11 @@ local FFlagMomentsOverlaysInTopShellOnlyModule = require(Moments.Flags.FFlagMome
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local SheetModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet) else nil
+local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
+local PostInsightsModule = if FFlagMomentsCreatorAnalyticsModule then require(Moments.Components.PostInsights) else nil
 
-local function closeSheets(p1) --[[ Line: 42 ]]
-	-- upvalues: GetExperienceDetailsSheetStoreModule (copy), SheetModule (copy)
+local function closeSheets(p1) --[[ Line: 44 ]]
+	-- upvalues: GetExperienceDetailsSheetStoreModule (copy), SheetModule (copy), PostInsightsModule (copy)
 	GetExperienceDetailsSheetStoreModule(false).close()
 	
 	if SheetModule ~= nil then
@@ -25,11 +27,14 @@ local function closeSheets(p1) --[[ Line: 42 ]]
 			CommentsSheetStore.close(if p1 == "popped" then "unmounted" else "navigation_hidden")
 		end
 	end
+	if PostInsightsModule ~= nil then
+		PostInsightsModule.getPostInsightsPageStore(false).close()
+	end
 end
 
-return function(p1) --[[ Line: 78 | Named "MomentsHostShell" ]]
-	-- upvalues: ReactModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsOverlaysInTopShellOnlyModule (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), ToastOverlayModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+return function(p1) --[[ Line: 83 | Named "MomentsHostShell" ]]
+	-- upvalues: ReactModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsOverlaysInTopShellOnlyModule (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), ToastOverlayModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
 		-- upvalues: p1 (copy), FFlagMomentsAvatarLookTryOn (upval)
 		return {
 			openProfile = p1.openProfile,
@@ -48,7 +53,7 @@ return function(p1) --[[ Line: 78 | Named "MomentsHostShell" ]]
 	
 	return ReactModule.createElement(MomentsSessionContextModule.MomentsSessionContext.Provider, { value = p1.sessionStore }, {
 		Host = ReactModule.createElement(MomentsHostContextModule.MomentsHostContext.Provider, { value = UseMemoResult }, {
-			Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ExperienceDetailsSheet) else nil, if FFlagMomentsComments and SheetModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(SheetModule.CommentsSheetContainer) else nil, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ToastOverlayModule) else nil)
+			Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ExperienceDetailsSheet) else nil, if FFlagMomentsComments and SheetModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(SheetModule.CommentsSheetContainer) else nil, if FFlagMomentsCreatorAnalyticsModule and PostInsightsModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(PostInsightsModule.PostInsightsPageContainer) else nil, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ToastOverlayModule) else nil)
 		})
 	})
 end

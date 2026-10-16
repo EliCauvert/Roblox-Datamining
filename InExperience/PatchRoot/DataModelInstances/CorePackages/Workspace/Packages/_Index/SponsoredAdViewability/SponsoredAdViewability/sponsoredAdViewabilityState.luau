@@ -1,40 +1,37 @@
 ﻿local _ = require(script.Parent.calculateIntersectionRatio)
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
-local FFlagLuaAppSponsoredAdVideoViewabilityEnabled = require(script:FindFirstAncestor("SponsoredAdViewability").Parent.SharedFlags).FFlagLuaAppSponsoredAdVideoViewabilityEnabled
-local v1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then 2000 else nil
-local List = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then {
+local HighestProgresses = {
 	0,
 	25,
 	50,
 	75,
 	100
-} else nil
+}
 local MilestoneLabels = {
 	IabDisplayStandard = "IabDisplayStandard",
 	IabDisplayLarge = "IabDisplayLarge",
 	FullView = "FullView",
-	IabVideoStandard = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then "IabVideoStandard" else nil,
-	FullViewVideo = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then "FullViewVideo" else nil
+	IabVideoStandard = "IabVideoStandard",
+	FullViewVideo = "FullViewVideo"
 }
 
-local function newBand(Threshold, CurrentContinuousMs) --[[ Line: 140 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
-	return if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and CurrentContinuousMs ~= nil then {
+local function newBand(Threshold, CurrentContinuousMs) --[[ Line: 129 ]]
+	return if CurrentContinuousMs == nil then {
+		enteredAtMs = nil,
+		cumulativeMs = 0,
+		maxContinuousMs = 0,
+		threshold = Threshold
+	} else {
 		enteredAtMs = nil,
 		pendingContinuity = false,
 		cumulativeMs = 0,
 		maxContinuousMs = 0,
 		threshold = Threshold,
 		currentContinuousMs = CurrentContinuousMs
-	} else {
-		enteredAtMs = nil,
-		cumulativeMs = 0,
-		maxContinuousMs = 0,
-		threshold = Threshold
 	}
 end
 
-local function _(p1, MaxContinuousMs) --[[ Line: 154 | Named "recordClosedWindow" ]]
+local function _(p1, MaxContinuousMs) --[[ Line: 143 | Named "recordClosedWindow" ]]
 	p1.cumulativeMs += MaxContinuousMs
 	
 	if p1.maxContinuousMs < MaxContinuousMs then
@@ -43,10 +40,9 @@ local function _(p1, MaxContinuousMs) --[[ Line: 154 | Named "recordClosedWindow
 	p1.enteredAtMs = nil
 end
 
-local _ = function(p1, p2) --[[ Line: 162 | Named "closeWindow" ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+local _ = function(p1, p2) --[[ Line: 151 | Named "closeWindow" ]]
 	local EnteredAtMs = p1.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then p1.currentContinuousMs else nil
+	local CurrentContinuousMs = p1.currentContinuousMs
 	
 	if CurrentContinuousMs == nil then
 		if EnteredAtMs == nil then return end
@@ -72,11 +68,10 @@ local _ = function(p1, p2) --[[ Line: 162 | Named "closeWindow" ]]
 	end
 end
 
-local _ = function(p1, p2, EnteredAtMs) --[[ Line: 182 | Named "updateBandTimer" ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+local _ = function(p1, p2, EnteredAtMs) --[[ Line: 171 | Named "updateBandTimer" ]]
 	if p1.threshold > p2 then
 		local EnteredAtMs1 = p1.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then p1.currentContinuousMs else nil
+		local CurrentContinuousMs = p1.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs1 == nil then return end
@@ -107,12 +102,11 @@ local _ = function(p1, p2, EnteredAtMs) --[[ Line: 182 | Named "updateBandTimer"
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 195 | Named "durationAsOf" ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+local _ = function(p1, p2) --[[ Line: 184 | Named "durationAsOf" ]]
 	local CumulativeMs = p1.cumulativeMs
 	local MaxContinuousMs = p1.maxContinuousMs
 	local EnteredAtMs = p1.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then p1.currentContinuousMs else nil
+	local CurrentContinuousMs = p1.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta = nil
 	
 	if CurrentContinuousMs == nil then
@@ -132,18 +126,18 @@ local _ = function(p1, p2) --[[ Line: 195 | Named "durationAsOf" ]]
 	return CumulativeMs, MaxContinuousMs
 end
 
-local _ = function(p1) --[[ Line: 216 | Named "continuousVideoDurationAsOf" ]]
+local _ = function(p1) --[[ Line: 205 | Named "continuousVideoDurationAsOf" ]]
 	return if p1.enteredAtMs == nil then 0 else p1.currentContinuousMs or 0
 end
 
-local _ = function(p1) --[[ Line: 223 | Named "preserveVideoBandAcrossSourceChange" ]]
+local _ = function(p1) --[[ Line: 212 | Named "preserveVideoBandAcrossSourceChange" ]]
 	if p1.enteredAtMs ~= nil then
 		p1.enteredAtMs = nil
 		p1.pendingContinuity = true
 	end
 end
 
-local function copyGeometry(LatchedGeometry) --[[ Line: 230 ]]
+local function copyGeometry(LatchedGeometry) --[[ Line: 219 ]]
 	return {
 		adSize = LatchedGeometry.adSize,
 		viewportBounds = {
@@ -153,15 +147,15 @@ local function copyGeometry(LatchedGeometry) --[[ Line: 230 ]]
 	}
 end
 
-local _ = function(p1): boolean --[[ Line: 240 | Named "audioOn" ]]
+local _ = function(p1): boolean --[[ Line: 229 | Named "audioOn" ]]
 	return p1 ~= nil and (p1.isPlaying and p1.audioLevel > 0)
 end
 
-local _ = function(p1: number): boolean --[[ Line: 244 | Named "isNonnegativeInteger" ]]
+local _ = function(p1: number): boolean --[[ Line: 233 | Named "isNonnegativeInteger" ]]
 	return typeof(p1) == "number" and p1 >= 0 and p1 % 1 == 0
 end
 
-local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean --[[ Line: 248 ]]
+local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean --[[ Line: 237 ]]
 	local PlaybackPositionMs: number = LastSnapshot.playbackPositionMs
 	local LoopCount: number = LastSnapshot.loopCount
 	local EndedCount: number = LastSnapshot.endedCount
@@ -171,7 +165,7 @@ local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean --[[ Line: 24
 	return typeof(LastSnapshot.isPlaying) == "boolean" and (typeof(PlaybackPositionMs) == "number" and PlaybackPositionMs >= 0) and (typeof(LoopCount) == "number" and (LoopCount >= 0 and LoopCount % 1 == 0 and (if EndedCount == nil then typeof(AudioLevel) == "number" and (AudioLevel >= 0 and AudioLevel <= 1) and (VideoLengthMs == nil or typeof(VideoLengthMs) == "number" and VideoLengthMs > 0) else typeof(EndedCount) == "number" and (EndedCount >= 0 and EndedCount % 1 == 0) and (typeof(AudioLevel) == "number" and (AudioLevel >= 0 and AudioLevel <= 1) and (VideoLengthMs == nil or typeof(VideoLengthMs) == "number" and VideoLengthMs > 0)))))
 end
 
-local _ = function(p1, p2) --[[ Line: 265 | Named "realEstateOf" ]]
+local _ = function(p1, p2) --[[ Line: 254 | Named "realEstateOf" ]]
 	if p2 == nil then
 		return 0
 	else
@@ -185,9 +179,9 @@ end
 local SponsoredAdViewabilityStateModule = {}
 SponsoredAdViewabilityStateModule.__index = SponsoredAdViewabilityStateModule
 
-function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ Line: 316 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), newBand (copy), SponsoredAdViewabilityStateModule (copy)
-	local IsEnabled: boolean = FFlagLuaAppSponsoredAdVideoViewabilityEnabled and Enabled == true
+function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ Line: 304 ]]
+	-- upvalues: newBand (copy), SponsoredAdViewabilityStateModule (copy)
+	local IsEnabled = Enabled == true
 	
 	return (setmetatable({
 		_displayLabel = nil,
@@ -209,9 +203,23 @@ function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ L
 		_band30 = newBand(0.3, if IsEnabled then 0 else nil),
 		_band50 = newBand(0.5, if IsEnabled then 0 else nil),
 		_band100 = newBand(1, if IsEnabled then 0 else nil),
-		_inGridBand50 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and IsEnabled then newBand(0.5, 0) else nil,
-		_fullscreenBand50 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and IsEnabled then newBand(0.5, 0) else nil,
-		_video = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and IsEnabled then {
+		_inGridBand50 = if IsEnabled then {
+			threshold = 0.5,
+			enteredAtMs = nil,
+			currentContinuousMs = 0,
+			pendingContinuity = false,
+			cumulativeMs = 0,
+			maxContinuousMs = 0
+		} else nil,
+		_fullscreenBand50 = if IsEnabled then {
+			threshold = 0.5,
+			enteredAtMs = nil,
+			currentContinuousMs = 0,
+			pendingContinuity = false,
+			cumulativeMs = 0,
+			maxContinuousMs = 0
+		} else nil,
+		_video = if IsEnabled then {
 			highestProgress = nil,
 			lengthMs = nil,
 			cumulativePlaytimeMs = 0,
@@ -226,7 +234,7 @@ function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ L
 	}, SponsoredAdViewabilityStateModule))
 end
 
-function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize) --[[ Line: 363 ]]
+function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize) --[[ Line: 347 ]]
 	-- upvalues: MilestoneLabels (copy)
 	if self._displayLabel ~= nil then return end
 	local ScaledX = AdSize.X * AdSize.Y
@@ -238,10 +246,10 @@ function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize) --[[ Lin
 	end
 end
 
-function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, EnteredAtMs, _latchedGeometry, List, p1) --[[ Line: 376 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), copyGeometry (copy)
+function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, EnteredAtMs, _latchedGeometry, List, p1) --[[ Line: 360 ]]
+	-- upvalues: copyGeometry (copy)
 	if self._achieved[MilestoneLabel] then return end
-	local Video = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then self._video else nil
+	local Video = self._video
 	local IsEnteredAtMsAbove = nil
 	
 	if Video == nil then
@@ -251,14 +259,11 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 		IsEnteredAtMsAbove = (if Band.enteredAtMs == nil then 0 else Band.currentContinuousMs or 0) >= (p1 or 1000)
 	end
 	if not IsEnteredAtMsAbove then return end
-	if not FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-		self._achieved[MilestoneLabel] = true
-	end
 	local Band30 = self._band30
 	local CumulativeMs = Band30.cumulativeMs
 	local MaxContinuousMs = Band30.maxContinuousMs
 	local EnteredAtMs2 = Band30.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+	local CurrentContinuousMs = Band30.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta = nil
 	
 	if CurrentContinuousMs == nil then
@@ -281,7 +286,7 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 	local CumulativeMs1 = Band50.cumulativeMs
 	local MaxContinuousMs1 = Band50.maxContinuousMs
 	local EnteredAtMs3 = Band50.enteredAtMs
-	local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+	local CurrentContinuousMs1 = Band50.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta1 = nil
 	
 	if CurrentContinuousMs1 == nil then
@@ -304,7 +309,7 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 	local CumulativeMs2 = Band100.cumulativeMs
 	local MaxContinuousMs2 = Band100.maxContinuousMs
 	local EnteredAtMs4 = Band100.enteredAtMs
-	local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+	local CurrentContinuousMs2 = Band100.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta2 = nil
 	
 	if CurrentContinuousMs2 == nil then
@@ -333,7 +338,7 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 		maxContinuous100PercentInViewDurationMs = MaxContinuousMs2
 	}
 	
-	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and Video ~= nil then
+	if Video ~= nil then
 		local InGridBand50 = self._inGridBand50
 		local FullscreenBand50 = self._fullscreenBand50
 		
@@ -341,50 +346,48 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 		config.isFullScreen = Video.isFullscreen
 		config.videoLengthMs = Video.lengthMs
 		config.maxAudioLevel = Video.maxAudioLevel
-		local CumulativeMs11 = InGridBand50.cumulativeMs
+		local CumulativeMs3 = InGridBand50.cumulativeMs
 		local MaxContinuousMs3 = InGridBand50.maxContinuousMs
-		local EnteredAtMs6 = InGridBand50.enteredAtMs
-		local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+		local EnteredAtMs5 = InGridBand50.enteredAtMs
+		local CurrentContinuousMs3 = InGridBand50.currentContinuousMs
 		local ImageBandRequiresTheCurrentTimestampDelta3 = nil
 		
 		if CurrentContinuousMs3 == nil then
-			if EnteredAtMs6 ~= nil then
-				ImageBandRequiresTheCurrentTimestampDelta3 = assert(nil, "image band requires the current timestamp") - EnteredAtMs6
+			if EnteredAtMs5 ~= nil then
+				ImageBandRequiresTheCurrentTimestampDelta3 = assert(nil, "image band requires the current timestamp") - EnteredAtMs5
 			end
-		elseif EnteredAtMs6 ~= nil or InGridBand50.pendingContinuity then
+		elseif EnteredAtMs5 ~= nil or InGridBand50.pendingContinuity then
 			ImageBandRequiresTheCurrentTimestampDelta3 = CurrentContinuousMs3
 		end
 		if ImageBandRequiresTheCurrentTimestampDelta3 ~= nil then
-			CumulativeMs11 += ImageBandRequiresTheCurrentTimestampDelta3
+			CumulativeMs3 += ImageBandRequiresTheCurrentTimestampDelta3
 			
 		end
-		config.cumulativeInGridViewDurationMs = CumulativeMs11
-		local CumulativeMs21 = FullscreenBand50.cumulativeMs
-		local MaxContinuousMs11 = FullscreenBand50.maxContinuousMs
-		local EnteredAtMs5 = FullscreenBand50.enteredAtMs
-		local CurrentContinuousMs11 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
-		local ImageBandRequiresTheCurrentTimestampDelta21 = nil
+		config.cumulativeInGridViewDurationMs = CumulativeMs3
+		local CumulativeMs4 = FullscreenBand50.cumulativeMs
+		local MaxContinuousMs4 = FullscreenBand50.maxContinuousMs
+		local EnteredAtMs6 = FullscreenBand50.enteredAtMs
+		local CurrentContinuousMs4 = FullscreenBand50.currentContinuousMs
+		local ImageBandRequiresTheCurrentTimestampDelta4 = nil
 		
-		if CurrentContinuousMs11 == nil then
-			if EnteredAtMs5 ~= nil then
-				ImageBandRequiresTheCurrentTimestampDelta21 = assert(nil, "image band requires the current timestamp") - EnteredAtMs5
+		if CurrentContinuousMs4 == nil then
+			if EnteredAtMs6 ~= nil then
+				ImageBandRequiresTheCurrentTimestampDelta4 = assert(nil, "image band requires the current timestamp") - EnteredAtMs6
 			end
-		elseif EnteredAtMs5 ~= nil or FullscreenBand50.pendingContinuity then
-			ImageBandRequiresTheCurrentTimestampDelta21 = CurrentContinuousMs11
+		elseif EnteredAtMs6 ~= nil or FullscreenBand50.pendingContinuity then
+			ImageBandRequiresTheCurrentTimestampDelta4 = CurrentContinuousMs4
 		end
-		if ImageBandRequiresTheCurrentTimestampDelta21 ~= nil then
-			CumulativeMs21 += ImageBandRequiresTheCurrentTimestampDelta21
+		if ImageBandRequiresTheCurrentTimestampDelta4 ~= nil then
+			CumulativeMs4 += ImageBandRequiresTheCurrentTimestampDelta4
 			
 		end
-		config.cumulativeFullScreenViewDurationMs = CumulativeMs21
+		config.cumulativeFullScreenViewDurationMs = CumulativeMs4
 	end
-	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-		self._achieved[MilestoneLabel] = true
-	end
+	self._achieved[MilestoneLabel] = true
 	table.insert(List, config)
 end
 
-function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: number, LatchedGeometry) --[[ Line: 440 ]]
+function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: number, LatchedGeometry) --[[ Line: 419 ]]
 	local LastSampleMs = self._lastSampleMs
 	
 	if LastSampleMs ~= nil and self._lastRatio > 0 then
@@ -419,8 +422,7 @@ function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: n
 	end
 end
 
-local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, EnteredAtMs) --[[ Line: 470 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, EnteredAtMs) --[[ Line: 449 ]]
 	if FullscreenBand.pendingContinuity then
 		if p2 and FullscreenBand.threshold <= p4 then
 			FullscreenBand.pendingContinuity = false
@@ -434,7 +436,7 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 			end
 		else
 			local EnteredAtMs1 = FullscreenBand.enteredAtMs
-			local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand.currentContinuousMs else nil
+			local CurrentContinuousMs = FullscreenBand.currentContinuousMs
 			
 			if CurrentContinuousMs == nil then
 				if EnteredAtMs1 == nil then return end
@@ -463,7 +465,7 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 	elseif p1 and FullscreenBand.threshold <= p4 then
 		if p3 < FullscreenBand.threshold then
 			local EnteredAtMs3 = FullscreenBand.enteredAtMs
-			local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand.currentContinuousMs else nil
+			local CurrentContinuousMs2 = FullscreenBand.currentContinuousMs
 			
 			if CurrentContinuousMs2 == nil then
 				if EnteredAtMs3 ~= nil then
@@ -505,7 +507,7 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 			
 			if not p2 then
 				local EnteredAtMs4 = FullscreenBand.enteredAtMs
-				local CurrentContinuousMs4 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand.currentContinuousMs else nil
+				local CurrentContinuousMs4 = FullscreenBand.currentContinuousMs
 				
 				if CurrentContinuousMs4 == nil then
 					if EnteredAtMs4 == nil then return end
@@ -534,7 +536,7 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 		end
 	else
 		local EnteredAtMs2 = FullscreenBand.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand.currentContinuousMs else nil
+		local CurrentContinuousMs = FullscreenBand.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs2 == nil then return end
@@ -561,30 +563,30 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 	end
 end
 
-local _ = function(p1, p2, p3, p4, p5, p6, p7, EnteredAtMs) --[[ Line: 521 | Named "updateModeBand" ]]
+local _ = function(p1, p2, p3, p4, p5, p6, p7, EnteredAtMs) --[[ Line: 500 | Named "updateModeBand" ]]
 	-- upvalues: updateVideoBand (copy)
 	local P40 = p2 or p1.pendingContinuity == true
 	updateVideoBand(p1, p3 and P40, p4 and P40, p5, p6, p7, EnteredAtMs)
 end
 
-local _ = function(p1, p2, p3, p4, p5: number): number --[[ Line: 543 | Named "observedVideoMovementMs" ]]
+local _ = function(p1, p2, p3, p4, p5: number): number --[[ Line: 522 | Named "observedVideoMovementMs" ]]
 	if p1 == nil or p2 == nil or p3 == nil or p4 == nil then
 		return 0
 	elseif p4 < p3 then
 		return 0
 	else
-		local v2 = p4 - p3
+		local v1 = p4 - p3
 		
-		return if v2 == 0 then math.max(0, p2 - p1) elseif p5 == nil or p5 <= 0 then 0 else math.max(0, v2 * p5 + p2 - p1)
+		return if v1 == 0 then math.max(0, p2 - p1) elseif p5 == nil or p5 <= 0 then 0 else math.max(0, v1 * p5 + p2 - p1)
 	end
 end
 
-local _ = function(p1, p2: number, p3): number --[[ Line: 574 | Named "videoProgressPercent" ]]
+local _ = function(p1, p2: number, p3): number --[[ Line: 553 | Named "videoProgressPercent" ]]
 	return if p1 then 100 elseif p2 == nil or p2 <= 0 then 0 else math.clamp(p3 / p2 * 100, 0, 100)
 end
 
-function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoProgress, p1) --[[ Line: 588 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), copyGeometry (copy)
+function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoProgress, p1) --[[ Line: 567 ]]
+	-- upvalues: copyGeometry (copy)
 	local Video = self._video
 	local InGridBand50 = self._inGridBand50
 	local FullscreenBand50 = self._fullscreenBand50
@@ -596,7 +598,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	local CumulativeMs = Band30.cumulativeMs
 	local MaxContinuousMs = Band30.maxContinuousMs
 	local EnteredAtMs = Band30.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+	local CurrentContinuousMs = Band30.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta = nil
 	
 	if CurrentContinuousMs == nil then
@@ -619,7 +621,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	local CumulativeMs1 = Band50.cumulativeMs
 	local MaxContinuousMs1 = Band50.maxContinuousMs
 	local EnteredAtMs1 = Band50.enteredAtMs
-	local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+	local CurrentContinuousMs1 = Band50.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta1 = nil
 	
 	if CurrentContinuousMs1 == nil then
@@ -642,7 +644,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	local CumulativeMs2 = Band100.cumulativeMs
 	local MaxContinuousMs2 = Band100.maxContinuousMs
 	local EnteredAtMs2 = Band100.enteredAtMs
-	local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+	local CurrentContinuousMs2 = Band100.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta2 = nil
 	
 	if CurrentContinuousMs2 == nil then
@@ -664,7 +666,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	local CumulativeMs3 = InGridBand50.cumulativeMs
 	local MaxContinuousMs3 = InGridBand50.maxContinuousMs
 	local EnteredAtMs3 = InGridBand50.enteredAtMs
-	local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+	local CurrentContinuousMs3 = InGridBand50.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta21 = nil
 	
 	if CurrentContinuousMs3 == nil then
@@ -682,7 +684,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	local CumulativeMs4 = FullscreenBand50.cumulativeMs
 	local MaxContinuousMs4 = FullscreenBand50.maxContinuousMs
 	local EnteredAtMs4 = FullscreenBand50.enteredAtMs
-	local CurrentContinuousMs4 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+	local CurrentContinuousMs4 = FullscreenBand50.currentContinuousMs
 	local ImageBandRequiresTheCurrentTimestampDelta3 = nil
 	
 	if CurrentContinuousMs4 == nil then
@@ -718,14 +720,14 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	}
 end
 
-function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio: number, LastRatio1: number, _latchedGeometry, LastSnapshot, IsFullscreen) --[[ Line: 627 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), isValidVideoPlaybackSnapshot (copy), updateVideoBand (copy), List (copy)
-	local List1 = {}
+function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio: number, LastRatio1: number, _latchedGeometry, LastSnapshot, IsFullscreen) --[[ Line: 606 ]]
+	-- upvalues: isValidVideoPlaybackSnapshot (copy), updateVideoBand (copy), HighestProgresses (copy)
+	local List = {}
 	
 	if self._video == nil or self._inGridBand50 == nil or self._fullscreenBand50 == nil then
 		local Band30 = self._band30
 		local EnteredAtMs1 = Band30.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+		local CurrentContinuousMs = Band30.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs1 ~= nil then
@@ -749,15 +751,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 		end
 		local Band50 = self._band50
 		local EnteredAtMs2 = Band50.enteredAtMs
-		local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+		local CurrentContinuousMs1 = Band50.currentContinuousMs
 		
 		if CurrentContinuousMs1 == nil then
 			if EnteredAtMs2 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
-				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
+				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
 				Band50.enteredAtMs = nil
 			end
@@ -773,15 +775,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 		end
 		local Band100 = self._band100
 		local EnteredAtMs3 = Band100.enteredAtMs
-		local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+		local CurrentContinuousMs2 = Band100.currentContinuousMs
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs3 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
-				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
-					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
 				Band100.enteredAtMs = nil
 			end
@@ -795,7 +797,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			Band100.currentContinuousMs = 0
 			Band100.pendingContinuity = false
 		end
-		return List1, false, false
+		return List, false, false
 	else
 		local Video = self._video
 		local InGridBand50 = self._inGridBand50
@@ -814,15 +816,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			
 			if Band30.pendingContinuity then
 				local EnteredAtMs4 = Band30.enteredAtMs
-				local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+				local CurrentContinuousMs = Band30.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs4 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta3 = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
-						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta3
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
+						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta3 then
-							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta3
+						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						Band30.enteredAtMs = nil
 					end
@@ -838,15 +840,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs5 = Band30.enteredAtMs
-				local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+				local CurrentContinuousMs2 = Band30.currentContinuousMs
 				
 				if CurrentContinuousMs2 == nil then
 					if EnteredAtMs5 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta5 = assert(nil, "image band requires an end timestamp") - EnteredAtMs5
-						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta5
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs5
+						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta5 then
-							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta5
+						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						Band30.enteredAtMs = nil
 					end
@@ -865,15 +867,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			
 			if Band50.pendingContinuity then
 				local EnteredAtMs6 = Band50.enteredAtMs
-				local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+				local CurrentContinuousMs = Band50.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs6 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta6 = assert(nil, "image band requires an end timestamp") - EnteredAtMs6
-						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta6
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs6
+						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta6 then
-							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta6
+						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						Band50.enteredAtMs = nil
 					end
@@ -889,15 +891,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs7 = Band50.enteredAtMs
-				local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+				local CurrentContinuousMs3 = Band50.currentContinuousMs
 				
 				if CurrentContinuousMs3 == nil then
 					if EnteredAtMs7 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta8 = assert(nil, "image band requires an end timestamp") - EnteredAtMs7
-						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta8
+						local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs7
+						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
 						
-						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta8 then
-							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta8
+						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
+							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
 						end
 						Band50.enteredAtMs = nil
 					end
@@ -916,15 +918,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			
 			if Band100.pendingContinuity then
 				local EnteredAtMs8 = Band100.enteredAtMs
-				local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+				local CurrentContinuousMs = Band100.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs8 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta4 = assert(nil, "image band requires an end timestamp") - EnteredAtMs8
-						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta4
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs8
+						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta4 then
-							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta4
+						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						Band100.enteredAtMs = nil
 					end
@@ -940,15 +942,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs9 = Band100.enteredAtMs
-				local CurrentContinuousMs4 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+				local CurrentContinuousMs4 = Band100.currentContinuousMs
 				
 				if CurrentContinuousMs4 == nil then
 					if EnteredAtMs9 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta9 = assert(nil, "image band requires an end timestamp") - EnteredAtMs9
-						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta9
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs9
+						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta9 then
-							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta9
+						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						Band100.enteredAtMs = nil
 					end
@@ -965,15 +967,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			end
 			if InGridBand50.pendingContinuity then
 				local EnteredAtMs10 = InGridBand50.enteredAtMs
-				local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+				local CurrentContinuousMs = InGridBand50.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs10 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta7 = assert(nil, "image band requires an end timestamp") - EnteredAtMs10
-						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta7
+						local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs10
+						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
 						
-						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta7 then
-							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta7
+						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
+							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
 						end
 						InGridBand50.enteredAtMs = nil
 					end
@@ -989,15 +991,15 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs11 = InGridBand50.enteredAtMs
-				local CurrentContinuousMs5 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+				local CurrentContinuousMs5 = InGridBand50.currentContinuousMs
 				
 				if CurrentContinuousMs5 == nil then
 					if EnteredAtMs11 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta10 = assert(nil, "image band requires an end timestamp") - EnteredAtMs11
-						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta10
+						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs11
+						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 						
-						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta10 then
-							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta10
+						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 						end
 						InGridBand50.enteredAtMs = nil
 					end
@@ -1014,7 +1016,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			end
 			if FullscreenBand50.pendingContinuity then
 				local EnteredAtMs12 = FullscreenBand50.enteredAtMs
-				local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+				local CurrentContinuousMs = FullscreenBand50.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs12 ~= nil then
@@ -1038,7 +1040,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs13 = FullscreenBand50.enteredAtMs
-				local CurrentContinuousMs6 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+				local CurrentContinuousMs6 = FullscreenBand50.currentContinuousMs
 				
 				if CurrentContinuousMs6 == nil then
 					if EnteredAtMs13 ~= nil then
@@ -1064,7 +1066,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			Video.lastSampleMs = EnteredAtMs
 			Video.lastSnapshot = nil
 			
-			return List1, false, false
+			return List, false, false
 		else
 			if LastSnapshot.videoLengthMs ~= nil then
 				Video.lengthMs = LastSnapshot.videoLengthMs
@@ -1078,7 +1080,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			local LengthMs: number = Video.lengthMs
 			local Largest = nil
 			
-			if PlaybackPositionMs1 == nil or (PlaybackPositionMs == nil or (LoopCount1 == nil or LoopCount == nil)) then
+			if PlaybackPositionMs1 == nil or PlaybackPositionMs == nil or LoopCount1 == nil or LoopCount == nil then
 				Largest = 0
 			elseif LoopCount < LoopCount1 then
 				Largest = 0
@@ -1108,7 +1110,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			if IsPlaying1 then
 				Video.cumulativePlaytimeMs += Smallest
 				
-				if LastSnapshot1 ~= nil and (LastSnapshot1 ~= nil and (LastSnapshot1.isPlaying and LastSnapshot1.audioLevel > 0)) and (LastSnapshot ~= nil and (LastSnapshot.isPlaying and LastSnapshot.audioLevel > 0) or IsEndedCountBelow1) then
+				if LastSnapshot1 ~= nil and (LastSnapshot1 ~= nil and (LastSnapshot1.isPlaying and LastSnapshot1.audioLevel > 0) and (LastSnapshot ~= nil and (LastSnapshot.isPlaying and LastSnapshot.audioLevel > 0) or IsEndedCountBelow1)) then
 					Video.cumulativeAudioPlaybackMs += Smallest
 					Video.maxAudioLevel = math.max(Video.maxAudioLevel, LastSnapshot1.audioLevel, LastSnapshot.audioLevel)
 					
@@ -1120,13 +1122,13 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			if (IsPlaying1 or IsLoopCountBelow) and _latchedGeometry ~= nil then
 				local LengthMs1: number = Video.lengthMs
 				local ClampedValue: number = if IsLoopCountBelow then 100 elseif LengthMs1 == nil or LengthMs1 <= 0 then 0 else math.clamp(PlaybackPositionMs / LengthMs1 * 100, 0, 100)
-				for _, HighestProgress in List do
-					if (Video.highestProgress == nil or Video.highestProgress < HighestProgress) and HighestProgress <= ClampedValue then
-						local VideoProgressMilestone = self:_buildVideoProgressMilestone(HighestProgress, _latchedGeometry)
+				for _, highestProgress in HighestProgresses do
+					if (Video.highestProgress == nil or Video.highestProgress < highestProgress) and highestProgress <= ClampedValue then
+						local VideoProgressMilestone = self:_buildVideoProgressMilestone(highestProgress, _latchedGeometry)
 						
 						if VideoProgressMilestone ~= nil then
-							Video.highestProgress = HighestProgress
-							table.insert(List1, VideoProgressMilestone)
+							Video.highestProgress = highestProgress
+							table.insert(List, VideoProgressMilestone)
 						end
 					end
 				end
@@ -1134,13 +1136,12 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			Video.lastSampleMs = EnteredAtMs
 			Video.lastSnapshot = LastSnapshot
 			
-			return List1, NoIsEndedCountBelow1, HasLatchedGeometry
+			return List, NoIsEndedCountBelow1, HasLatchedGeometry
 		end
 	end
 end
 
-function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2) --[[ Line: 756 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2) --[[ Line: 735 ]]
 	local Video = self._video
 	local InGridBand50 = self._inGridBand50
 	local FullscreenBand50 = self._fullscreenBand50
@@ -1157,15 +1158,15 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 		end
 		if Video.isFullscreen then
 			local EnteredAtMs = InGridBand50.enteredAtMs
-			local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+			local CurrentContinuousMs = InGridBand50.currentContinuousMs
 			
 			if CurrentContinuousMs == nil then
 				if EnteredAtMs ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs
-					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs
+					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 					
-					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 					end
 					InGridBand50.enteredAtMs = nil
 				end
@@ -1189,15 +1190,15 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 				InGridBand50.pendingContinuity = true
 			end
 			local EnteredAtMs = FullscreenBand50.enteredAtMs
-			local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+			local CurrentContinuousMs = FullscreenBand50.currentContinuousMs
 			
 			if CurrentContinuousMs == nil then
 				if EnteredAtMs ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs
-					FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs
+					FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 					
-					if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
-						FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+					if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 					end
 					FullscreenBand50.enteredAtMs = nil
 				end
@@ -1215,15 +1216,15 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 	else
 		for _, value1 in { self._band30, self._band50, self._band100 } do
 			local EnteredAtMs1 = value1.enteredAtMs
-			local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then value1.currentContinuousMs else nil
+			local CurrentContinuousMs1 = value1.currentContinuousMs
 			
 			if CurrentContinuousMs1 == nil then
 				if EnteredAtMs1 ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta3 = assert(nil, "image band requires an end timestamp") - EnteredAtMs1
-					value1.cumulativeMs += ImageBandRequiresAnEndTimestampDelta3
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs1
+					value1.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 					
-					if value1.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta3 then
-						value1.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta3
+					if value1.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						value1.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 					end
 					value1.enteredAtMs = nil
 				end
@@ -1239,15 +1240,15 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 			end
 		end
 		local EnteredAtMs2 = InGridBand50.enteredAtMs
-		local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+		local CurrentContinuousMs2 = InGridBand50.currentContinuousMs
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs2 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta4 = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
-				InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta4
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
+				InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta4 then
-					InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta4
+				if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
 				InGridBand50.enteredAtMs = nil
 			end
@@ -1262,7 +1263,7 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 			InGridBand50.pendingContinuity = false
 		end
 		local EnteredAtMs = FullscreenBand50.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+		local CurrentContinuousMs = FullscreenBand50.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs ~= nil then
@@ -1295,11 +1296,10 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 	self._lastRealEstate = 0
 end
 
-function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 798 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
-	local HasVideo = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then self._video ~= nil else nil
+function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 777 ]]
+	local HasVideo = self._video ~= nil
 	
-	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and HasVideo then
+	if HasVideo then
 		if self._finalized or self._pausedAtMs ~= nil then return end
 		Largest = math.max(Largest, self._lastSampleMs or self.startTimestampMs)
 	else
@@ -1309,35 +1309,35 @@ function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 798
 	end
 	self:_accumulate(Largest, 0, nil)
 	
-	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and HasVideo then
+	if HasVideo then
 		local Video = self._video
-		local Band30_1 = self._band30
-		local EnteredAtMs1 = Band30_1.enteredAtMs
-		local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30_1.currentContinuousMs else nil
+		local Band30 = self._band30
+		local EnteredAtMs = Band30.enteredAtMs
+		local CurrentContinuousMs = Band30.currentContinuousMs
 		
-		if CurrentContinuousMs1 == nil then
-			if EnteredAtMs1 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs1
-				Band30_1.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+		if CurrentContinuousMs == nil then
+			if EnteredAtMs ~= nil then
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs
+				Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if Band30_1.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band30_1.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+				if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
-				Band30_1.enteredAtMs = nil
+				Band30.enteredAtMs = nil
 			end
-		elseif EnteredAtMs1 ~= nil or Band30_1.pendingContinuity then
-			Band30_1.cumulativeMs += CurrentContinuousMs1
+		elseif EnteredAtMs ~= nil or Band30.pendingContinuity then
+			Band30.cumulativeMs += CurrentContinuousMs
 			
-			if Band30_1.maxContinuousMs < CurrentContinuousMs1 then
-				Band30_1.maxContinuousMs = CurrentContinuousMs1
+			if Band30.maxContinuousMs < CurrentContinuousMs then
+				Band30.maxContinuousMs = CurrentContinuousMs
 			end
-			Band30_1.enteredAtMs = nil
-			Band30_1.currentContinuousMs = 0
-			Band30_1.pendingContinuity = false
+			Band30.enteredAtMs = nil
+			Band30.currentContinuousMs = 0
+			Band30.pendingContinuity = false
 		end
 		local Band50 = self._band50
 		local EnteredAtMs2 = Band50.enteredAtMs
-		local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+		local CurrentContinuousMs2 = Band50.currentContinuousMs
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs2 ~= nil then
@@ -1360,12 +1360,144 @@ function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 798
 			Band50.pendingContinuity = false
 		end
 		local Band100 = self._band100
+		local EnteredAtMs1 = Band100.enteredAtMs
+		local CurrentContinuousMs1 = Band100.currentContinuousMs
+		
+		if CurrentContinuousMs1 == nil then
+			if EnteredAtMs1 ~= nil then
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs1
+				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+				
+				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+				end
+				Band100.enteredAtMs = nil
+			end
+		elseif EnteredAtMs1 ~= nil or Band100.pendingContinuity then
+			Band100.cumulativeMs += CurrentContinuousMs1
+			
+			if Band100.maxContinuousMs < CurrentContinuousMs1 then
+				Band100.maxContinuousMs = CurrentContinuousMs1
+			end
+			Band100.enteredAtMs = nil
+			Band100.currentContinuousMs = 0
+			Band100.pendingContinuity = false
+		end
+		local InGridBand50 = self._inGridBand50
+		local FullscreenBand50 = self._fullscreenBand50
+		
+		if InGridBand50 ~= nil then
+			local EnteredAtMs3 = InGridBand50.enteredAtMs
+			local CurrentContinuousMs3 = InGridBand50.currentContinuousMs
+			
+			if CurrentContinuousMs3 == nil then
+				if EnteredAtMs3 ~= nil then
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+					
+					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+					end
+					InGridBand50.enteredAtMs = nil
+				end
+			elseif EnteredAtMs3 ~= nil or InGridBand50.pendingContinuity then
+				InGridBand50.cumulativeMs += CurrentContinuousMs3
+				
+				if InGridBand50.maxContinuousMs < CurrentContinuousMs3 then
+					InGridBand50.maxContinuousMs = CurrentContinuousMs3
+				end
+				InGridBand50.enteredAtMs = nil
+				InGridBand50.currentContinuousMs = 0
+				InGridBand50.pendingContinuity = false
+			end
+		end
+		if FullscreenBand50 ~= nil then
+			local EnteredAtMs4 = FullscreenBand50.enteredAtMs
+			local CurrentContinuousMs4 = FullscreenBand50.currentContinuousMs
+			
+			if CurrentContinuousMs4 == nil then
+				if EnteredAtMs4 ~= nil then
+					local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
+					FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+					
+					if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
+						FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+					end
+					FullscreenBand50.enteredAtMs = nil
+				end
+			elseif EnteredAtMs4 ~= nil or FullscreenBand50.pendingContinuity then
+				FullscreenBand50.cumulativeMs += CurrentContinuousMs4
+				
+				if FullscreenBand50.maxContinuousMs < CurrentContinuousMs4 then
+					FullscreenBand50.maxContinuousMs = CurrentContinuousMs4
+				end
+				FullscreenBand50.enteredAtMs = nil
+				FullscreenBand50.currentContinuousMs = 0
+				FullscreenBand50.pendingContinuity = false
+			end
+		end
+		Video.lastSampleMs = nil
+		Video.lastSnapshot = nil
+		Video.audioOnAtEvent = false
+	else
+		local Band30_1 = self._band30
+		local Largest1: number = Largest
+		local EnteredAtMs1 = Band30_1.enteredAtMs
+		local CurrentContinuousMs1 = Band30_1.currentContinuousMs
+		
+		if CurrentContinuousMs1 == nil then
+			if EnteredAtMs1 ~= nil then
+				local ImageBandRequiresAnEndTimestampDelta2 = assert(Largest1, "image band requires an end timestamp") - EnteredAtMs1
+				Band30_1.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+				
+				if Band30_1.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
+					Band30_1.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+				end
+				Band30_1.enteredAtMs = nil
+			end
+		elseif EnteredAtMs1 ~= nil or Band30_1.pendingContinuity then
+			Band30_1.cumulativeMs += CurrentContinuousMs1
+			
+			if Band30_1.maxContinuousMs < CurrentContinuousMs1 then
+				Band30_1.maxContinuousMs = CurrentContinuousMs1
+			end
+			Band30_1.enteredAtMs = nil
+			Band30_1.currentContinuousMs = 0
+			Band30_1.pendingContinuity = false
+		end
+		local Band50 = self._band50
+		local Largest2: number = Largest
+		local EnteredAtMs = Band50.enteredAtMs
+		local CurrentContinuousMs = Band50.currentContinuousMs
+		
+		if CurrentContinuousMs == nil then
+			if EnteredAtMs ~= nil then
+				local ImageBandRequiresAnEndTimestampDelta3 = assert(Largest2, "image band requires an end timestamp") - EnteredAtMs
+				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta3
+				
+				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta3 then
+					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta3
+				end
+				Band50.enteredAtMs = nil
+			end
+		elseif EnteredAtMs ~= nil or Band50.pendingContinuity then
+			Band50.cumulativeMs += CurrentContinuousMs
+			
+			if Band50.maxContinuousMs < CurrentContinuousMs then
+				Band50.maxContinuousMs = CurrentContinuousMs
+			end
+			Band50.enteredAtMs = nil
+			Band50.currentContinuousMs = 0
+			Band50.pendingContinuity = false
+		end
+		local Band100 = self._band100
+		local Largest3: number = Largest
 		local EnteredAtMs3 = Band100.enteredAtMs
-		local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+		local CurrentContinuousMs3 = Band100.currentContinuousMs
 		
 		if CurrentContinuousMs3 == nil then
 			if EnteredAtMs3 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+				local ImageBandRequiresAnEndTimestampDelta = assert(Largest3, "image band requires an end timestamp") - EnteredAtMs3
 				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
 				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
@@ -1383,148 +1515,14 @@ function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 798
 			Band100.currentContinuousMs = 0
 			Band100.pendingContinuity = false
 		end
-		local InGridBand50 = self._inGridBand50
-		local FullscreenBand50 = self._fullscreenBand50
-		
-		if InGridBand50 ~= nil then
-			local EnteredAtMs4 = InGridBand50.enteredAtMs
-			local CurrentContinuousMs4 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
-			
-			if CurrentContinuousMs4 == nil then
-				if EnteredAtMs4 ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
-					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
-					
-					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
-					end
-					InGridBand50.enteredAtMs = nil
-				end
-			elseif EnteredAtMs4 ~= nil or InGridBand50.pendingContinuity then
-				InGridBand50.cumulativeMs += CurrentContinuousMs4
-				
-				if InGridBand50.maxContinuousMs < CurrentContinuousMs4 then
-					InGridBand50.maxContinuousMs = CurrentContinuousMs4
-				end
-				InGridBand50.enteredAtMs = nil
-				InGridBand50.currentContinuousMs = 0
-				InGridBand50.pendingContinuity = false
-			end
-		end
-		if FullscreenBand50 ~= nil then
-			local EnteredAtMs5 = FullscreenBand50.enteredAtMs
-			local CurrentContinuousMs5 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
-			
-			if CurrentContinuousMs5 == nil then
-				if EnteredAtMs5 ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs5
-					FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
-					
-					if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-						FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
-					end
-					FullscreenBand50.enteredAtMs = nil
-				end
-			elseif EnteredAtMs5 ~= nil or FullscreenBand50.pendingContinuity then
-				FullscreenBand50.cumulativeMs += CurrentContinuousMs5
-				
-				if FullscreenBand50.maxContinuousMs < CurrentContinuousMs5 then
-					FullscreenBand50.maxContinuousMs = CurrentContinuousMs5
-				end
-				FullscreenBand50.enteredAtMs = nil
-				FullscreenBand50.currentContinuousMs = 0
-				FullscreenBand50.pendingContinuity = false
-			end
-		end
-		Video.lastSampleMs = nil
-		Video.lastSnapshot = nil
-		Video.audioOnAtEvent = false
-	else
-		local Band30 = self._band30
-		local Largest1: number = Largest
-		local EnteredAtMs = Band30.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
-		
-		if CurrentContinuousMs == nil then
-			if EnteredAtMs ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(Largest1, "image band requires an end timestamp") - EnteredAtMs
-				Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
-				
-				if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
-				end
-				Band30.enteredAtMs = nil
-			end
-		elseif EnteredAtMs ~= nil or Band30.pendingContinuity then
-			Band30.cumulativeMs += CurrentContinuousMs
-			
-			if Band30.maxContinuousMs < CurrentContinuousMs then
-				Band30.maxContinuousMs = CurrentContinuousMs
-			end
-			Band30.enteredAtMs = nil
-			Band30.currentContinuousMs = 0
-			Band30.pendingContinuity = false
-		end
-		local Band50 = self._band50
-		local Largest2: number = Largest
-		local EnteredAtMs6 = Band50.enteredAtMs
-		local CurrentContinuousMs6 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
-		
-		if CurrentContinuousMs6 == nil then
-			if EnteredAtMs6 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta1 = assert(Largest2, "image band requires an end timestamp") - EnteredAtMs6
-				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
-				
-				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
-				end
-				Band50.enteredAtMs = nil
-			end
-		elseif EnteredAtMs6 ~= nil or Band50.pendingContinuity then
-			Band50.cumulativeMs += CurrentContinuousMs6
-			
-			if Band50.maxContinuousMs < CurrentContinuousMs6 then
-				Band50.maxContinuousMs = CurrentContinuousMs6
-			end
-			Band50.enteredAtMs = nil
-			Band50.currentContinuousMs = 0
-			Band50.pendingContinuity = false
-		end
-		local Band100 = self._band100
-		local Largest3: number = Largest
-		local EnteredAtMs7 = Band100.enteredAtMs
-		local CurrentContinuousMs7 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
-		
-		if CurrentContinuousMs7 == nil then
-			if EnteredAtMs7 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(Largest3, "image band requires an end timestamp") - EnteredAtMs7
-				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
-				
-				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
-				end
-				Band100.enteredAtMs = nil
-			end
-		elseif EnteredAtMs7 ~= nil or Band100.pendingContinuity then
-			Band100.cumulativeMs += CurrentContinuousMs7
-			
-			if Band100.maxContinuousMs < CurrentContinuousMs7 then
-				Band100.maxContinuousMs = CurrentContinuousMs7
-			end
-			Band100.enteredAtMs = nil
-			Band100.currentContinuousMs = 0
-			Band100.pendingContinuity = false
-		end
 	end
 	self._pausedAtMs = Largest
 end
 
-function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number) --[[ Line: 836 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number) --[[ Line: 815 ]]
 	local PausedAtMs: number = self._pausedAtMs
-	local HasVideo = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then self._video ~= nil else nil
 	
-	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and HasVideo then
+	if self._video ~= nil then
 		if self._finalized or PausedAtMs == nil then return end
 		_lastSampleMs = math.max(_lastSampleMs, PausedAtMs)
 	else
@@ -1539,8 +1537,8 @@ function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number) --[[ Li
 	self._lastRealEstate = 0
 end
 
-function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry) --[[ Line: 859 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), MilestoneLabels (copy)
+function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry) --[[ Line: 838 ]]
+	-- upvalues: MilestoneLabels (copy)
 	assert(not self._finalized, "advance called after finalize")
 	assert(self._pausedAtMs == nil, "advance called while paused")
 	local t = {}
@@ -1558,7 +1556,7 @@ function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, Last
 		end
 	else
 		local EnteredAtMs1 = Band30.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+		local CurrentContinuousMs = Band30.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs1 ~= nil then
@@ -1589,7 +1587,7 @@ function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, Last
 		end
 	else
 		local EnteredAtMs2 = Band50.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+		local CurrentContinuousMs = Band50.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs2 ~= nil then
@@ -1620,7 +1618,7 @@ function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, Last
 		end
 	else
 		local EnteredAtMs3 = Band100.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+		local CurrentContinuousMs = Band100.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs3 ~= nil then
@@ -1656,9 +1654,9 @@ function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, Last
 	return t
 end
 
-function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latchedGeometry, LastSnapshot, Enabled) --[[ Line: 894 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), MilestoneLabels (copy), v1 (copy)
-	if not FFlagLuaAppSponsoredAdVideoViewabilityEnabled or self._video == nil then
+function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latchedGeometry, LastSnapshot, Enabled) --[[ Line: 873 ]]
+	-- upvalues: MilestoneLabels (copy)
+	if self._video == nil then
 		return self:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry)
 	end
 	local t = {}
@@ -1677,13 +1675,13 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		return t, AdvanceVideoResult
 	end
 	if AdvanceVideoResult2 or AdvanceVideoResult3 then
-		self:_tryFire(self._band50, MilestoneLabels.IabVideoStandard, EnteredAtMs, _latchedGeometry, t, v1)
+		self:_tryFire(self._band50, MilestoneLabels.IabVideoStandard, EnteredAtMs, _latchedGeometry, t, 2000)
 		self:_tryFire(self._band100, MilestoneLabels.FullViewVideo, EnteredAtMs, _latchedGeometry, t, 1000)
 	end
 	if AdvanceVideoResult3 then
 		local Band30 = self._band30
 		local EnteredAtMs1 = Band30.enteredAtMs
-		local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+		local CurrentContinuousMs = Band30.currentContinuousMs
 		
 		if CurrentContinuousMs == nil then
 			if EnteredAtMs1 ~= nil then
@@ -1707,15 +1705,15 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		end
 		local Band50 = self._band50
 		local EnteredAtMs2 = Band50.enteredAtMs
-		local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+		local CurrentContinuousMs1 = Band50.currentContinuousMs
 		
 		if CurrentContinuousMs1 == nil then
 			if EnteredAtMs2 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
-				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+				local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
+				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
 				
-				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
+					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
 				end
 				Band50.enteredAtMs = nil
 			end
@@ -1731,15 +1729,15 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		end
 		local Band100 = self._band100
 		local EnteredAtMs3 = Band100.enteredAtMs
-		local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+		local CurrentContinuousMs2 = Band100.currentContinuousMs
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs3 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
-				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
 				Band100.enteredAtMs = nil
 			end
@@ -1758,15 +1756,15 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		
 		if InGridBand50 ~= nil then
 			local EnteredAtMs4 = InGridBand50.enteredAtMs
-			local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+			local CurrentContinuousMs3 = InGridBand50.currentContinuousMs
 			
 			if CurrentContinuousMs3 == nil then
 				if EnteredAtMs4 ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
-					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
+					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 					
-					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
-						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 					end
 					InGridBand50.enteredAtMs = nil
 				end
@@ -1783,7 +1781,7 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		end
 		if FullscreenBand50 ~= nil then
 			local EnteredAtMs5 = FullscreenBand50.enteredAtMs
-			local CurrentContinuousMs4 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+			local CurrentContinuousMs4 = FullscreenBand50.currentContinuousMs
 			
 			if CurrentContinuousMs4 == nil then
 				if EnteredAtMs5 ~= nil then
@@ -1810,14 +1808,13 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 	return t, AdvanceVideoResult
 end
 
-function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessionEndTimestampMs) --[[ Line: 954 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessionEndTimestampMs) --[[ Line: 933 ]]
 	assert(not self._finalized, "finalize called more than once on the same session")
 	self._finalized = true
 	self:_accumulate(ViewabilitySessionEndTimestampMs, self._lastRatio, self._latchedGeometry)
 	local Band30 = self._band30
 	local EnteredAtMs = Band30.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+	local CurrentContinuousMs = Band30.currentContinuousMs
 	
 	if CurrentContinuousMs == nil then
 		if EnteredAtMs ~= nil then
@@ -1841,7 +1838,7 @@ function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessi
 	end
 	local Band50 = self._band50
 	local EnteredAtMs1 = Band50.enteredAtMs
-	local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+	local CurrentContinuousMs1 = Band50.currentContinuousMs
 	
 	if CurrentContinuousMs1 == nil then
 		if EnteredAtMs1 ~= nil then
@@ -1865,7 +1862,7 @@ function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessi
 	end
 	local Band100 = self._band100
 	local EnteredAtMs2 = Band100.enteredAtMs
-	local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+	local CurrentContinuousMs2 = Band100.currentContinuousMs
 	
 	if CurrentContinuousMs2 == nil then
 		if EnteredAtMs2 ~= nil then
@@ -1923,9 +1920,9 @@ function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessi
 	}
 end
 
-function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimestampMs: number) --[[ Line: 1002 ]]
-	-- upvalues: FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), copyGeometry (copy)
-	if not FFlagLuaAppSponsoredAdVideoViewabilityEnabled or self._video == nil then
+function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimestampMs: number) --[[ Line: 981 ]]
+	-- upvalues: copyGeometry (copy)
+	if self._video == nil then
 		return self:_finalize_deprecated(ViewabilitySessionEndTimestampMs)
 	end
 	if self._finalized then
@@ -1946,7 +1943,7 @@ function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimesta
 	self:_accumulate(Largest, self._lastRatio, self._latchedGeometry)
 	local Band30 = self._band30
 	local EnteredAtMs = Band30.enteredAtMs
-	local CurrentContinuousMs = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band30.currentContinuousMs else nil
+	local CurrentContinuousMs = Band30.currentContinuousMs
 	
 	if CurrentContinuousMs == nil then
 		if EnteredAtMs ~= nil then
@@ -1970,7 +1967,7 @@ function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimesta
 	end
 	local Band50 = self._band50
 	local EnteredAtMs1 = Band50.enteredAtMs
-	local CurrentContinuousMs1 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band50.currentContinuousMs else nil
+	local CurrentContinuousMs1 = Band50.currentContinuousMs
 	
 	if CurrentContinuousMs1 == nil then
 		if EnteredAtMs1 ~= nil then
@@ -1994,7 +1991,7 @@ function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimesta
 	end
 	local Band100 = self._band100
 	local EnteredAtMs2 = Band100.enteredAtMs
-	local CurrentContinuousMs2 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then Band100.currentContinuousMs else nil
+	local CurrentContinuousMs2 = Band100.currentContinuousMs
 	
 	if CurrentContinuousMs2 == nil then
 		if EnteredAtMs2 ~= nil then
@@ -2017,7 +2014,7 @@ function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimesta
 		Band100.pendingContinuity = false
 	end
 	local EnteredAtMs21 = InGridBand50.enteredAtMs
-	local CurrentContinuousMs21 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then InGridBand50.currentContinuousMs else nil
+	local CurrentContinuousMs21 = InGridBand50.currentContinuousMs
 	
 	if CurrentContinuousMs21 == nil then
 		if EnteredAtMs21 ~= nil then
@@ -2040,7 +2037,7 @@ function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimesta
 		InGridBand50.pendingContinuity = false
 	end
 	local EnteredAtMs3 = FullscreenBand50.enteredAtMs
-	local CurrentContinuousMs3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then FullscreenBand50.currentContinuousMs else nil
+	local CurrentContinuousMs3 = FullscreenBand50.currentContinuousMs
 	
 	if CurrentContinuousMs3 == nil then
 		if EnteredAtMs3 ~= nil then

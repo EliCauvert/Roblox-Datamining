@@ -1,4 +1,5 @@
 ﻿local FeedModule = require(script.Components.Feed)
+local _ = require(script.MomentsHostContext)
 
 return {
 	["jest.config"] = script["jest.config"],

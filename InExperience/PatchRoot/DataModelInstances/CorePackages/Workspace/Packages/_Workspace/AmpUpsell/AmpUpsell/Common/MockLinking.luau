@@ -11,18 +11,28 @@ function MockLinkingModule:registerURL(_) --[[ Line: 16 ]] end
 
 function MockLinkingModule:detectURL(_) --[[ Line: 20 ]] end
 
-function MockLinkingModule:listenForLuaURLs(_) --[[ Line: 24 ]] end
+function MockLinkingModule:isInternalDlicEnabled(): boolean --[[ Line: 24 ]]
+	return false
+end
 
-function MockLinkingModule:stopListeningForLuaURLs() --[[ Line: 28 ]] end
+function MockLinkingModule:createInternalDlic(_, _): string --[[ Line: 28 ]]
+	return "mock-deeplink-id"
+end
 
-function MockLinkingModule:openURL(LastOpenedURL) --[[ Line: 32 ]]
+function MockLinkingModule:detectDeeplinkIntent(_) --[[ Line: 32 ]] end
+
+function MockLinkingModule:listenForLuaURLs(_) --[[ Line: 34 ]] end
+
+function MockLinkingModule:stopListeningForLuaURLs() --[[ Line: 38 ]] end
+
+function MockLinkingModule:openURL(LastOpenedURL) --[[ Line: 42 ]]
 	-- upvalues: PromiseModule (copy)
 	self.lastOpenedURL = LastOpenedURL
 	
 	return PromiseModule.resolve(true)
 end
 
-function MockLinkingModule:isURLRegistered(_) --[[ Line: 37 ]]
+function MockLinkingModule:isURLRegistered(_) --[[ Line: 47 ]]
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve(true)
 end

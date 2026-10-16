@@ -8,7 +8,9 @@ local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
 local TModule = require(Parent.t)
 local MutedErrorFunction = require(Parent.Loggers).mutedError
-local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local LinkingProtocolModule = require(Parent.LinkingProtocol)
+local DeepLinkSource = LinkingProtocolModule.Enums.DeepLinkSource
+local Default = LinkingProtocolModule.LinkingProtocol.default
 local StrictInterfaceResult = TModule.strictInterface({
 	action = TModule.string,
 	linkPath = TModule.string,
@@ -17,7 +19,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	durationInSeconds = TModule.optional(TModule.number)
 })
 
-local function _(p1) --[[ Line: 28 | Named "validateEventSchema" ]]
+local function _(p1) --[[ Line: 30 | Named "validateEventSchema" ]]
 	-- upvalues: StrictInterfaceResult (copy), MutedErrorFunction (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p1)
 	
@@ -26,17 +28,17 @@ local function _(p1) --[[ Line: 28 | Named "validateEventSchema" ]]
 	end
 end
 
-return function() --[[ Line: 36 | Named "useNavigateToSortLinkWebView" ]]
-	-- upvalues: UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), StrictInterfaceResult (copy), MutedErrorFunction (copy), UrlBuilder (copy), Default (copy), AppPage (copy)
+return function() --[[ Line: 38 | Named "useNavigateToSortLinkWebView" ]]
+	-- upvalues: UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), StrictInterfaceResult (copy), MutedErrorFunction (copy), UrlBuilder (copy), Default (copy), DeepLinkSource (copy), AppPage (copy)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 38 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 40 ]]
 		return p1.getWebViewSupport()
 	end)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return ReactModule.useCallback(function(Text: string, p1, Title, GameSetTypeId, Callback) --[[ Line: 44 ]]
-		-- upvalues: UseAppPolicyResult (copy), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (copy), UrlBuilder (upval), Default (upval), UseNavigationResult (copy), AppPage (upval)
-		local function _(Action, DurationInSeconds) --[[ Line: 45 ]]
+	return ReactModule.useCallback(function(Text: string, p1, Title, GameSetTypeId, Callback) --[[ Line: 46 ]]
+		-- upvalues: UseAppPolicyResult (copy), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (copy), UrlBuilder (upval), Default (upval), DeepLinkSource (upval), UseNavigationResult (copy), AppPage (upval)
+		local function _(Action, DurationInSeconds) --[[ Line: 47 ]]
 			-- upvalues: Text (copy), GameSetTypeId (copy), UseAppPolicyResult (upval), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (upval), p1 (copy)
 			local config = {
 				linkPath = Text,
@@ -87,18 +89,14 @@ return function() --[[ Line: 36 | Named "useNavigateToSortLinkWebView" ]]
 			MutedErrorFunction(StrictInterfaceResultResult2_1)
 		end
 		UseRoactServiceResult:sendEventDeferred(p1, "navigateToSortLink", config1)
-		Default:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 69 ]]
-			-- upvalues: Default (upval), Detail (copy), UseNavigationResult (upval), AppPage (upval), Title (copy), ClockTime (copy), Text (copy), GameSetTypeId (copy), UseAppPolicyResult (upval), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (upval), p1 (copy), Callback (copy)
-			if Result then
-				Default:detectURL(Detail)
-				
-				return
-			else
+		Default:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 71 ]]
+			-- upvalues: Default (upval), Detail (copy), DeepLinkSource (upval), UseNavigationResult (upval), AppPage (upval), Title (copy), ClockTime (copy), Text (copy), GameSetTypeId (copy), UseAppPolicyResult (upval), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (upval), p1 (copy), Callback (copy)
+			if not Result then
 				UseNavigationResult.navigate(AppPage.GenericWebPage, {
 					detail = Detail,
 					extraProps = {
 						title = Title,
-						onClose = function() --[[ Line: 77 ]]
+						onClose = function() --[[ Line: 84 ]]
 							-- upvalues: ClockTime (upval), Text (upval), GameSetTypeId (upval), UseAppPolicyResult (upval), StrictInterfaceResult (upval), MutedErrorFunction (upval), UseRoactServiceResult (upval), p1 (upval), Callback (upval)
 							local config = {
 								action = "close",
@@ -120,6 +118,15 @@ return function() --[[ Line: 36 | Named "useNavigateToSortLinkWebView" ]]
 						end
 					}
 				})
+				
+				return
+			end
+			if Default:isInternalDlicEnabled() then
+				Default:detectDeeplinkIntent((Default:createInternalDlic(Detail, DeepLinkSource.LuaInternal)))
+				
+				return
+			else
+				Default:detectURL(Detail)
 			end
 		end)
 	end, { UseNavigationResult, UseAppPolicyResult })

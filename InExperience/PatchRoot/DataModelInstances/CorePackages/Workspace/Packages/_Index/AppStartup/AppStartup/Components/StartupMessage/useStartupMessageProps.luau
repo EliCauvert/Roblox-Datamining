@@ -100,23 +100,28 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 		-- upvalues: UseRoactServiceResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		UseRoactServiceResult:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 118 ]]
 			-- upvalues: UseRoactServiceResult (upval), Detail (copy), AppPage (upval), Title (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
-			if Result then
-				UseRoactServiceResult:detectURL(Detail)
+			if not Result then
+				local config = {
+					name = AppPage.GenericWebPage,
+					detail = Detail,
+					extraProps = { title = Title }
+				}
 				
-				return
-			end
-			local config = {
-				name = AppPage.GenericWebPage,
-				detail = Detail,
-				extraProps = { title = Title }
-			}
-			
-			if FFlagSignalsNavP3Dispatch then
-				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+					
+					return
+				else
+					UseDispatchResult(NavigateDownFunction(config))
+					
+					return
+				end
+			elseif UseRoactServiceResult:isInternalDlicEnabled() then
+				UseRoactServiceResult:detectDeeplinkIntent((UseRoactServiceResult:createInternalDlic(Detail, UseRoactServiceResult.DeepLinkSource.LuaInternal)))
 				
 				return
 			else
-				UseDispatchResult(NavigateDownFunction(config))
+				UseRoactServiceResult:detectURL(Detail)
 			end
 		end)
 	end, { UseDispatchResult, UseRoactServiceResult })
@@ -125,7 +130,7 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		isFocusable = not UseStateResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function() --[[ Line: 149 ]]
 		-- upvalues: UseStateResult1 (copy), NoUseStateResult (copy), LoggingEventName (copy), UseRoactServiceResult1 (copy), UseStateResult2_1 (copy)
 		if not UseStateResult1 and NoUseStateResult and LoggingEventName then
 			UseRoactServiceResult1:logEphemeralCounterEvent({

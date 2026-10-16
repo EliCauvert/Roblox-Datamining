@@ -7,7 +7,8 @@
 	TelemetryConfigs = require(script.RobloxTelemetry.TelemetryConfigs),
 	RobloxTelemetry = require(script.RobloxTelemetry),
 	Flags = {
-		FFlagEnableTimeToLoginMetrics = require(script.Flags.FFlagEnableTimeToLoginMetrics)
+		FFlagEnableTimeToLoginMetrics = require(script.Flags.FFlagEnableTimeToLoginMetrics),
+		FFlagRestartTimeToLoginOnHumanInteractionRetry = require(script.Flags.FFlagRestartTimeToLoginOnHumanInteractionRetry)
 	},
 	["jest.config"] = script["jest.config"]
 }

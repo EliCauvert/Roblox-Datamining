@@ -24,7 +24,6 @@ local PerformCreatorStorePurchaseModule = require(PurchasePrompt.Network.perform
 local NetworkModule = require(PurchasePrompt.Services.Network)
 local AnalyticsModule = require(PurchasePrompt.Services.Analytics)
 local ExternalSettingsModule = require(PurchasePrompt.Services.ExternalSettings)
-local GetPlayerPriceModule = require(PurchasePrompt.Utils.getPlayerPrice)
 local IsCreatorStoreAssetTypeModule = require(PurchasePrompt.Utils.isCreatorStoreAssetType)
 local ThunkModule = require(PurchasePrompt.Thunk)
 local PromiseModule = require(PurchasePrompt.Promise)
@@ -40,7 +39,6 @@ local GetFFlagEnableCreatorStorePurchasingCutoverModule = require(PurchasePrompt
 local LogUnifiedPurchaseTelemetryCounterModule = require(PurchasePrompt.Utils.logUnifiedPurchaseTelemetryCounter)
 local ReportPurchasePromptNonCollectiblePurchaseModule = require(PurchasePrompt.Telemetry.reportPurchasePromptNonCollectiblePurchase)
 local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
-local FFlagPurchasePromptPriceShouldUseProductInfoPriceModule = require(PurchasePrompt.Flags.FFlagPurchasePromptPriceShouldUseProductInfoPrice)
 local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local FFlagPassOfferIdInPurchasePayload = require(Parent.SharedFlags).FFlagPassOfferIdInPurchasePayload
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
@@ -52,15 +50,15 @@ local FFlagEnableNonCollectiblePurchaseCountersLua = require(Parent.SharedFlags)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local list = { NetworkModule, AnalyticsModule, ExternalSettingsModule }
 
-function isLuaPurchase(p1): boolean --[[ Line: 84 ]]
+function isLuaPurchase(p1): boolean --[[ Line: 81 ]]
 	-- upvalues: ProductTypeEnum (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy)
 	return p1 ~= nil and (p1.kind == ProductTypeEnum.Product and p1.universeId ~= nil or (p1.kind == ProductTypeEnum.Experience or (p1.kind == ProductTypeEnum.Look or FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.kind == ProductTypeEnum.DeveloperSubscription)))
 end
 
-return function() --[[ Line: 97 | Named "purchaseItem" ]]
-	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), AnalyticsModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RequestTypeModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), StartPurchaseModule (copy), Workspace (copy), ExperienceAuthService (copy), CompletePurchaseModule (copy), PurchaseFlowModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), HttpService (copy), FFlagPurchasePromptPriceShouldUseProductInfoPriceModule (copy), SelectProductPriceModule (copy), GetPlayerPriceModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), DerivePurchaseOptionsFromCartPricingResponseModule (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), FFlagMockDevSubPurchaseInStudioModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), PerformLuaPurchaseModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), IsCreatorStoreAssetTypeModule (copy), PerformCreatorStorePurchaseModule (copy), PromiseModule (copy), ErrorOccurredModule (copy), PerformPurchaseV2Module (copy), IsEconomicRestrictionResponseFunction (copy), ParseEconomicRestrictionsFailureReasonFunction (copy), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (copy), SetEconomicRestrictionErrorModule (copy), PurchaseErrorModule (copy), HandlePriceChangedErrorModule (copy), FFlagEnableNonCollectiblePurchaseCountersLua (copy), ReportPurchasePromptNonCollectiblePurchaseModule (copy), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagPassOfferIdInPurchasePayload (copy), MergeOfferIdsIntoPurchasePayloadModule (copy), PerformPurchaseModule (copy), ItemTypeModule (copy), GetToolAssetModule (copy), Players (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 98 ]]
-		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), AnalyticsModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), RequestTypeModule (upval), FFlagPurchasePromptCartPricingEnabledModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), StartPurchaseModule (upval), Workspace (upval), ExperienceAuthService (upval), CompletePurchaseModule (upval), PurchaseFlowModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), HttpService (upval), FFlagPurchasePromptPriceShouldUseProductInfoPriceModule (upval), SelectProductPriceModule (upval), GetPlayerPriceModule (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), DerivePurchaseOptionsFromCartPricingResponseModule (upval), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval), FFlagMockDevSubPurchaseInStudioModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), ProductTypeEnum (upval), PerformLuaPurchaseModule (upval), GetFFlagEnableCreatorStorePurchasingCutoverModule (upval), IsCreatorStoreAssetTypeModule (upval), PerformCreatorStorePurchaseModule (upval), PromiseModule (upval), ErrorOccurredModule (upval), PerformPurchaseV2Module (upval), IsEconomicRestrictionResponseFunction (upval), ParseEconomicRestrictionsFailureReasonFunction (upval), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (upval), SetEconomicRestrictionErrorModule (upval), PurchaseErrorModule (upval), HandlePriceChangedErrorModule (upval), FFlagEnableNonCollectiblePurchaseCountersLua (upval), ReportPurchasePromptNonCollectiblePurchaseModule (upval), FFlagEnablePurchasePayloadInExperienceShop (upval), FFlagPassOfferIdInPurchasePayload (upval), MergeOfferIdsIntoPurchasePayloadModule (upval), PerformPurchaseModule (upval), ItemTypeModule (upval), GetToolAssetModule (upval), Players (upval)
+return function() --[[ Line: 94 | Named "purchaseItem" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), AnalyticsModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RequestTypeModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), StartPurchaseModule (copy), Workspace (copy), ExperienceAuthService (copy), CompletePurchaseModule (copy), PurchaseFlowModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), HttpService (copy), SelectProductPriceModule (copy), DerivePurchaseOptionsFromCartPricingResponseModule (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), FFlagMockDevSubPurchaseInStudioModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), PerformLuaPurchaseModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), IsCreatorStoreAssetTypeModule (copy), PerformCreatorStorePurchaseModule (copy), PromiseModule (copy), ErrorOccurredModule (copy), PerformPurchaseV2Module (copy), IsEconomicRestrictionResponseFunction (copy), ParseEconomicRestrictionsFailureReasonFunction (copy), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (copy), SetEconomicRestrictionErrorModule (copy), PurchaseErrorModule (copy), HandlePriceChangedErrorModule (copy), FFlagEnableNonCollectiblePurchaseCountersLua (copy), ReportPurchasePromptNonCollectiblePurchaseModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagPassOfferIdInPurchasePayload (copy), MergeOfferIdsIntoPurchasePayloadModule (copy), PerformPurchaseModule (copy), ItemTypeModule (copy), GetToolAssetModule (copy), Players (copy)
+	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 95 ]]
+		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), AnalyticsModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), RequestTypeModule (upval), FFlagPurchasePromptCartPricingEnabledModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), StartPurchaseModule (upval), Workspace (upval), ExperienceAuthService (upval), CompletePurchaseModule (upval), PurchaseFlowModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), HttpService (upval), SelectProductPriceModule (upval), DerivePurchaseOptionsFromCartPricingResponseModule (upval), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval), FFlagMockDevSubPurchaseInStudioModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), ProductTypeEnum (upval), PerformLuaPurchaseModule (upval), GetFFlagEnableCreatorStorePurchasingCutoverModule (upval), IsCreatorStoreAssetTypeModule (upval), PerformCreatorStorePurchaseModule (upval), PromiseModule (upval), ErrorOccurredModule (upval), PerformPurchaseV2Module (upval), IsEconomicRestrictionResponseFunction (upval), ParseEconomicRestrictionsFailureReasonFunction (upval), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (upval), SetEconomicRestrictionErrorModule (upval), PurchaseErrorModule (upval), HandlePriceChangedErrorModule (upval), FFlagEnableNonCollectiblePurchaseCountersLua (upval), ReportPurchasePromptNonCollectiblePurchaseModule (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), FFlagEnablePurchasePayloadInExperienceShop (upval), FFlagPassOfferIdInPurchasePayload (upval), MergeOfferIdsIntoPurchasePayloadModule (upval), PerformPurchaseModule (upval), ItemTypeModule (upval), GetToolAssetModule (upval), Players (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[ExternalSettingsModule]
 		local v3 = p2[AnalyticsModule]
@@ -110,14 +108,7 @@ return function() --[[ Line: 97 | Named "purchaseItem" ]]
 		local CollectibleItemId = State1.promptRequest.collectibleItemId
 		local CollectibleItemInstanceId = State1.promptRequest.collectibleItemInstanceId
 		local CollectibleProductId = State1.promptRequest.collectibleProductId
-		local SelectProductPriceModuleResult = nil
-		
-		if FFlagPurchasePromptPriceShouldUseProductInfoPriceModule then
-			SelectProductPriceModuleResult = SelectProductPriceModule(State1)
-		else
-			local ExpectedPrice = State1.promptRequest.expectedPrice
-			SelectProductPriceModuleResult = if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then ExpectedPrice elseif FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and State1.productPayload and State1.productPayload.timedOptionDays ~= nil then ExpectedPrice else GetPlayerPriceModule(State1.productInfo, State1.accountInfo.membershipType == 4)
-		end
+		local SelectProductPriceModuleResult = SelectProductPriceModule(State1)
 		local AssetTypeId = State1.productInfo.assetTypeId
 		local AssetType = State1.productInfo.assetType
 		local ProductId = State1.productInfo.productId
@@ -139,25 +130,25 @@ return function() --[[ Line: 97 | Named "purchaseItem" ]]
 		
 		if not isLuaPurchase(State1.productPayload) then
 			if GetFFlagEnableCreatorStorePurchasingCutoverModule() and IsCreatorStoreAssetTypeModule(AssetType) then
-				return PerformCreatorStorePurchaseModule(v1, ProductId, AssetType):andThen(function(Result) --[[ Line: 264 ]]
-					-- upvalues: p1 (copy), CompletePurchaseModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (ref), PromiseModule (upval)
+				return PerformCreatorStorePurchaseModule(v1, ProductId, AssetType):andThen(function(Result) --[[ Line: 244 ]]
+					-- upvalues: p1 (copy), CompletePurchaseModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (copy), PromiseModule (upval)
 					p1:dispatch(CompletePurchaseModule())
 					v3.signalPurchaseSuccess(Id, InfoType, SelectProductPriceModuleResult, Result)
 					
 					return PromiseModule.resolve()
-				end):catch(function(Err) --[[ Line: 273 ]]
+				end):catch(function(Err) --[[ Line: 253 ]]
 					-- upvalues: p1 (copy), ErrorOccurredModule (upval)
 					p1:dispatch(ErrorOccurredModule(Err))
 				end)
 			end
 			if IsInfoTypeMatch or CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then
-				return PerformPurchaseV2Module(v1, InfoType, ProductId, SelectProductPriceModuleResult, Guid, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, CollectibleItemInstanceId, if FFlagPurchasePromptCartPricingEnabledModule or FFlagEnableMarketplacePurchaseDeepLinkAttribution then DerivePurchaseOptionsFromCartPricingResponseModuleResult else nil):andThen(function(Result) --[[ Line: 293 ]]
-					-- upvalues: p1 (copy), CompletePurchaseModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (ref), PromiseModule (upval)
+				return PerformPurchaseV2Module(v1, InfoType, ProductId, SelectProductPriceModuleResult, Guid, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, CollectibleItemInstanceId, if FFlagPurchasePromptCartPricingEnabledModule or FFlagEnableMarketplacePurchaseDeepLinkAttribution then DerivePurchaseOptionsFromCartPricingResponseModuleResult else nil):andThen(function(Result) --[[ Line: 273 ]]
+					-- upvalues: p1 (copy), CompletePurchaseModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (copy), PromiseModule (upval)
 					p1:dispatch(CompletePurchaseModule(Result))
 					v3.signalPurchaseSuccess(Id, InfoType, SelectProductPriceModuleResult, Result)
 					
 					return PromiseModule.resolve()
-				end):catch(function(Err) --[[ Line: 300 ]]
+				end):catch(function(Err) --[[ Line: 280 ]]
 					-- upvalues: IsEconomicRestrictionResponseFunction (upval), ParseEconomicRestrictionsFailureReasonFunction (upval), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (upval), p1 (copy), SetEconomicRestrictionErrorModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), HandlePriceChangedErrorModule (upval), State1 (copy), v3 (copy), ProductId (copy), InfoType (copy), Platform (copy)
 					if IsEconomicRestrictionResponseFunction(Err) then
 						p1:dispatch(SetEconomicRestrictionErrorModule(ParseEconomicRestrictionsFailureReasonFunction(Err), (ParseEconomicRestrictionsExpirationTimeInMinutesFunction(Err))))
@@ -189,20 +180,20 @@ return function() --[[ Line: 97 | Named "purchaseItem" ]]
 					PurchasePayload = MergeOfferIdsIntoPurchasePayloadModule(PurchasePayload, DerivePurchaseOptionsFromCartPricingResponseModuleResult)
 				end
 			end
-			return PerformPurchaseModule(v1, InfoType, ProductId, SelectProductPriceModuleResult, Guid, IsRobloxPurchase, CollectibleItemId1, CollectibleProductId1, IdempotencyKey, PurchaseAuthToken, if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then TimedOptionDays else nil, if FFlagEnablePurchasePayloadInExperienceShop then PurchasePayload else nil, if FFlagPurchasePromptCartPricingEnabledModule or FFlagEnableMarketplacePurchaseDeepLinkAttribution then DerivePurchaseOptionsFromCartPricingResponseModuleResult else nil):andThen(function(Result) --[[ Line: 359 ]]
-				-- upvalues: p1 (copy), CompletePurchaseModule (upval), ItemType (copy), ItemTypeModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (ref), EquipIfPurchased (copy), AssetTypeId (copy), GetToolAssetModule (upval), v1 (copy), Players (upval), PromiseModule (upval)
+			return PerformPurchaseModule(v1, InfoType, ProductId, SelectProductPriceModuleResult, Guid, IsRobloxPurchase, CollectibleItemId1, CollectibleProductId1, IdempotencyKey, PurchaseAuthToken, if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then TimedOptionDays else nil, if FFlagEnablePurchasePayloadInExperienceShop then PurchasePayload else nil, if FFlagPurchasePromptCartPricingEnabledModule or FFlagEnableMarketplacePurchaseDeepLinkAttribution then DerivePurchaseOptionsFromCartPricingResponseModuleResult else nil):andThen(function(Result) --[[ Line: 339 ]]
+				-- upvalues: p1 (copy), CompletePurchaseModule (upval), ItemType (copy), ItemTypeModule (upval), v3 (copy), Id (copy), InfoType (copy), SelectProductPriceModuleResult (copy), EquipIfPurchased (copy), AssetTypeId (copy), GetToolAssetModule (upval), v1 (copy), Players (upval), PromiseModule (upval)
 				p1:dispatch(CompletePurchaseModule(Result))
 				
 				if ItemType ~= ItemTypeModule.Bundle then
 					v3.signalPurchaseSuccess(Id, InfoType, SelectProductPriceModuleResult, Result)
 				end
-				return if EquipIfPurchased and AssetTypeId == 19 then GetToolAssetModule(v1, Id):andThen(function(Result) --[[ Line: 368 ]]
+				return if EquipIfPurchased and AssetTypeId == 19 then GetToolAssetModule(v1, Id):andThen(function(Result) --[[ Line: 348 ]]
 					-- upvalues: Players (upval)
 					if Result then
 						Result.Parent = Players.LocalPlayer.Backpack
 					end
 				end) else PromiseModule.resolve()
-			end):catch(function(Err) --[[ Line: 377 ]]
+			end):catch(function(Err) --[[ Line: 357 ]]
 				-- upvalues: IsEconomicRestrictionResponseFunction (upval), ParseEconomicRestrictionsFailureReasonFunction (upval), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (upval), p1 (copy), SetEconomicRestrictionErrorModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), HandlePriceChangedErrorModule (upval), State1 (copy), v3 (copy), ProductId (copy), InfoType (copy), Platform (copy)
 				if IsEconomicRestrictionResponseFunction(Err) then
 					p1:dispatch(SetEconomicRestrictionErrorModule(ParseEconomicRestrictionsFailureReasonFunction(Err), (ParseEconomicRestrictionsExpirationTimeInMinutesFunction(Err))))
@@ -220,7 +211,7 @@ return function() --[[ Line: 97 | Named "purchaseItem" ]]
 				end
 				p1:dispatch(ErrorOccurredModule(Err))
 			end)
-		elseif FFlagMockDevSubPurchaseInStudioModule and FFlagEnableUnifiedPurchaseFlowForDevSubs and State1.productPayload.kind == ProductTypeEnum.DeveloperSubscription and v2.isStudio() then
+		elseif FFlagMockDevSubPurchaseInStudioModule and (FFlagEnableUnifiedPurchaseFlowForDevSubs and State1.productPayload.kind == ProductTypeEnum.DeveloperSubscription and v2.isStudio()) then
 			p1:dispatch(CompletePurchaseModule())
 			
 			return

@@ -38,7 +38,7 @@ local config = {
 	noDescription = "Feature.InExperienceShop.Label.NoDescription"
 }
 
-local function CreatorRow(Frame) --[[ Line: 83 ]]
+local function CreatorRow(Frame) --[[ Line: 86 ]]
 	-- upvalues: VerifiedBadgesModule (copy), ReactModule (copy), Text (copy)
 	local Creator = Frame.creator
 	
@@ -50,7 +50,7 @@ local function CreatorRow(Frame) --[[ Line: 83 ]]
 	})
 end
 
-local function DetailRow(Frame) --[[ Line: 95 ]]
+local function DetailRow(Frame) --[[ Line: 98 ]]
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row flex-x-between align-y-center size-full-0 auto-y padding-y-medium",
@@ -69,7 +69,7 @@ local function DetailRow(Frame) --[[ Line: 95 ]]
 	})
 end
 
-return function(p1) --[[ Line: 117 | Named "ItemDetailsView" ]]
+return function(p1) --[[ Line: 120 | Named "ItemDetailsView" ]]
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), DetailRow (copy), Divider (copy), View (copy), Text (copy), CreatorRow (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), FormatPriceModule (copy), REPORTMENUITEMID (copy), REPORTICON (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), Button (copy), FillBehavior (copy), Image (copy), IconName (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local NoDescription = if p1.description == nil or p1.description == "" then UseLocalizationResult.noDescription else p1.description
@@ -162,7 +162,7 @@ return function(p1) --[[ Line: 117 | Named "ItemDetailsView" ]]
 				variant = if IsIsOwned then ButtonVariant.Standard else ButtonVariant.Emphasis,
 				size = InputSize.Medium,
 				fillBehavior = FillBehavior.Fill,
-				isDisabled = IsIsOwned or IsIsBuyDisabled,
+				isDisabled = IsIsOwned or (IsIsBuyDisabled or p1.isActionDisabled == true),
 				onActivated = p1.onBuyActivated
 			}),
 			Try = if p1.showTry and not IsIsOwned then ReactModule.createElement(Button, {
@@ -171,7 +171,9 @@ return function(p1) --[[ Line: 117 | Named "ItemDetailsView" ]]
 				variant = ButtonVariant.Standard,
 				size = InputSize.Medium,
 				fillBehavior = FillBehavior.Fill,
-				onActivated = function() --[[ Line: 274 ]] end
+				onActivated = p1.onTryActivated or function() --[[ Line: 276 ]] end,
+				isLoading = p1.isActionLoading,
+				isDisabled = p1.isActionDisabled == true and p1.isActionLoading ~= true
 			}) else nil,
 			Overflow = if p1.isReportingEnabled then ReactModule.createElement(Menu, {
 				LayoutOrder = 3,

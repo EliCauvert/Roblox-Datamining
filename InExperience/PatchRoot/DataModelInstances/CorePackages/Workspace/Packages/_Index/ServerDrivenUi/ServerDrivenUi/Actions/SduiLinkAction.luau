@@ -3,6 +3,7 @@ local Parent = ServerDrivenUi.Parent
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local DeepLinkSource = require(Parent.LinkingProtocol).Enums.DeepLinkSource
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
@@ -10,13 +11,13 @@ local SduiCounterName = SduiCoreSystemModule.SduiErrors.SduiCounterName
 local OpenSduiWebLinkModule = require(ServerDrivenUi.Actions.openSduiWebLink)
 local FFlagSduiLinkActionSharedWebLink = require(Parent.SharedFlags).FFlagSduiLinkActionSharedWebLink
 
-local function _() --[[ Line: 24 | Named "isWebViewSupported" ]]
+local function _() --[[ Line: 25 | Named "isWebViewSupported" ]]
 	-- upvalues: GetAppFeaturePoliciesFunction (copy)
 	return GetAppFeaturePoliciesFunction().getWebViewSupport()
 end
 
-return function(p1, _, p2) --[[ Line: 28 ]]
-	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagSduiLinkActionSharedWebLink (copy), OpenSduiWebLinkModule (copy), UrlBuilder (copy), GetAppFeaturePoliciesFunction (copy), AppPage (copy), SduiCounterName (copy)
+return function(p1, _, p2) --[[ Line: 29 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagSduiLinkActionSharedWebLink (copy), OpenSduiWebLinkModule (copy), UrlBuilder (copy), DeepLinkSource (copy), GetAppFeaturePoliciesFunction (copy), AppPage (copy), SduiCounterName (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
 	if ActionParams == nil then
@@ -45,7 +46,7 @@ return function(p1, _, p2) --[[ Line: 28 ]]
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 61 ]]
+	local Success, Result = pcall(function() --[[ Line: 62 ]]
 		-- upvalues: UrlBuilder (upval), Url (copy)
 		return UrlBuilder.fromString(if string.find(Url, "/") == 1 then Url:gsub("/", "www:", 1) else Url)()
 	end)
@@ -61,31 +62,36 @@ return function(p1, _, p2) --[[ Line: 28 ]]
 		}, p2.appPage)
 	end
 	local LinkingProtocol = p2.dependencies.linkingProtocol
-	local Success1, Result1 = pcall(function() --[[ Line: 76 ]]
-		-- upvalues: LinkingProtocol (copy), Detail (ref), GetAppFeaturePoliciesFunction (upval), p2 (copy), TitleKey (copy), ActionParams (copy), AppPage (upval), SduiCounterName (upval)
-		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 77 ]]
-			-- upvalues: LinkingProtocol (upval), Detail (upval), GetAppFeaturePoliciesFunction (upval), p2 (upval), TitleKey (upval), ActionParams (upval), AppPage (upval), SduiCounterName (upval)
-			if Result then
-				LinkingProtocol:detectURL(Detail)
-				
-				return
-			end
-			if not GetAppFeaturePoliciesFunction().getWebViewSupport() then
-				p2.dependencies.logger.reportCounter(SduiCounterName.WebViewNotSupportedForLink, { name = Detail })
-				
-				return
-			end
-			local Navigation = p2.dependencies.getNavigation()
-			local ExtraProps = { titleKey = TitleKey }
-			local OnWebviewCloseFunction = ActionParams.onWebviewClose
-			
-			if OnWebviewCloseFunction then
-				function ExtraProps.onClose() --[[ Line: 85 ]]
-					-- upvalues: OnWebviewCloseFunction (copy)
-					OnWebviewCloseFunction()
+	local Success1, Result1 = pcall(function() --[[ Line: 77 ]]
+		-- upvalues: LinkingProtocol (copy), Detail (ref), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p2 (copy), TitleKey (copy), ActionParams (copy), AppPage (upval), SduiCounterName (upval)
+		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 78 ]]
+			-- upvalues: LinkingProtocol (upval), Detail (upval), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p2 (upval), TitleKey (upval), ActionParams (upval), AppPage (upval), SduiCounterName (upval)
+			if not Result then
+				if not GetAppFeaturePoliciesFunction().getWebViewSupport() then
+					p2.dependencies.logger.reportCounter(SduiCounterName.WebViewNotSupportedForLink, { name = Detail })
+					
+					return
 				end
+				local Navigation = p2.dependencies.getNavigation()
+				local ExtraProps = { titleKey = TitleKey }
+				local OnWebviewCloseFunction = ActionParams.onWebviewClose
+				
+				if OnWebviewCloseFunction then
+					function ExtraProps.onClose() --[[ Line: 91 ]]
+						-- upvalues: OnWebviewCloseFunction (copy)
+						OnWebviewCloseFunction()
+					end
+				end
+				Navigation.navigate(AppPage.GenericWebPage, { detail = Detail, extraProps = ExtraProps })
+				
+				return
+			elseif LinkingProtocol:isInternalDlicEnabled() then
+				LinkingProtocol:detectDeeplinkIntent((LinkingProtocol:createInternalDlic(Detail, DeepLinkSource.LuaInternal)))
+				
+				return
+			else
+				LinkingProtocol:detectURL(Detail)
 			end
-			Navigation.navigate(AppPage.GenericWebPage, { detail = Detail, extraProps = ExtraProps })
 		end)
 	end)
 	

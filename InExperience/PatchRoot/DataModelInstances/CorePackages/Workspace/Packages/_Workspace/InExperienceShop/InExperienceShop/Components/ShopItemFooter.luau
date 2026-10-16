@@ -16,11 +16,11 @@ local config = {
 	try = "Feature.Catalog.Action.Try"
 }
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 37 | Named "ShopItemFooter" ]]
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 42 | Named "ShopItemFooter" ]]
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), InitiateShopItemPurchaseModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local PurchaseCategoryLocation = Frame.purchaseCategoryLocation
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
 		-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (upval), PurchaseCategoryLocation (copy), InitiateShopItemPurchaseModule (upval), Frame (copy)
 		if FFlagCategoryLoggingInShopPurchaseModule and PurchaseCategoryLocation ~= nil then
 			InitiateShopItemPurchaseModule(Frame.itemId, Frame.itemType, Frame.shopPageType, PurchaseCategoryLocation)
@@ -43,13 +43,15 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 37 | Named "ShopItemFo
 		size = InputSize.Small,
 		width = UDim.new(1, 0),
 		LayoutOrder = Frame.LayoutOrder,
-		onActivated = function() --[[ Line: 58 ]] end
+		onActivated = function() --[[ Line: 63 ]] end
 	}) elseif FFlagLuaAppEnableGamePassFreeTrialsModule and Frame.showTry then ReactModule.createElement(Button, {
 		text = UseLocalizationResult.try,
 		variant = ButtonVariant.Standard,
 		size = InputSize.Small,
 		width = UDim.new(1, 0),
-		onActivated = function() --[[ Line: 68 ]] end,
+		onActivated = Frame.onTryActivated or function() --[[ Line: 73 ]] end,
+		isLoading = Frame.isActionLoading,
+		isDisabled = Frame.isActionDisabled == true and Frame.isActionLoading ~= true,
 		LayoutOrder = Frame.LayoutOrder
 	}) else ReactModule.createElement(Button, {
 		text = UseLocalizationResult.buy,
@@ -57,6 +59,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 37 | Named "ShopItemFo
 		size = InputSize.Small,
 		width = UDim.new(1, 0),
 		onActivated = UseResult,
+		isDisabled = Frame.isActionDisabled == true,
 		LayoutOrder = Frame.LayoutOrder
 	})
 end)

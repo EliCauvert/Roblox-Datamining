@@ -15,7 +15,9 @@ local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersive
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
-local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local LinkingProtocolModule = require(Parent.LinkingProtocol)
+local DeepLinkSource = LinkingProtocolModule.Enums.DeepLinkSource
+local Default = LinkingProtocolModule.LinkingProtocol.default
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
@@ -23,23 +25,23 @@ local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutCo
 local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
 local FlyoutGiftCardSourceParam = game:DefineFastString("FlyoutGiftCardSourceParam", "flyout-side-panel")
 
-return function(p1, Callback, p2) --[[ Line: 32 | Named "useFlyoutItemNavigation" ]]
-	-- upvalues: UseDispatchFunction (copy), FFlagCreateConnectionsHub (copy), FFlagEnableArgus (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FFlagFlyoutResolveItemContextOnActivationModule (copy), AppPage (copy), FFlagEnableArgusImmersiveNav (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Default (copy), FlyoutContentSettingsModule (copy), FlyoutGiftCardSourceParam (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FlyoutAnalyticsModule (copy)
+return function(p1, Callback, p2) --[[ Line: 34 | Named "useFlyoutItemNavigation" ]]
+	-- upvalues: UseDispatchFunction (copy), FFlagCreateConnectionsHub (copy), FFlagEnableArgus (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FFlagFlyoutResolveItemContextOnActivationModule (copy), AppPage (copy), FFlagEnableArgusImmersiveNav (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Default (copy), DeepLinkSource (copy), FlyoutContentSettingsModule (copy), FlyoutGiftCardSourceParam (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FlyoutAnalyticsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = if FFlagCreateConnectionsHub or FFlagEnableArgus then UseNavigationFunction() else nil
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 39 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 41 ]]
 		return p3.LocalUserId
 	end)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 42 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 44 ]]
 		return p3.getGiftCardSourceRefOverride()
 	end)
-	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p3) --[[ Line: 45 ]]
+	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p3) --[[ Line: 47 ]]
 		return p3
 	end)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return ReactModule.useCallback(function() --[[ Line: 51 ]]
-		-- upvalues: Callback (copy), FFlagFlyoutResolveItemContextOnActivationModule (upval), p1 (copy), FFlagCreateConnectionsHub (upval), AppPage (upval), UseNavigationResult (copy), FFlagEnableArgus (upval), FFlagEnableArgusImmersiveNav (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Default (upval), FlyoutContentSettingsModule (upval), UseSelectorResult (copy), UseAppPolicyResult (copy), FlyoutGiftCardSourceParam (upval), p2 (copy), UseAppPolicyResult1 (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
+	return ReactModule.useCallback(function() --[[ Line: 53 ]]
+		-- upvalues: Callback (copy), FFlagFlyoutResolveItemContextOnActivationModule (upval), p1 (copy), FFlagCreateConnectionsHub (upval), AppPage (upval), UseNavigationResult (copy), FFlagEnableArgus (upval), FFlagEnableArgusImmersiveNav (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Default (upval), DeepLinkSource (upval), FlyoutContentSettingsModule (upval), UseSelectorResult (copy), UseAppPolicyResult (copy), FlyoutGiftCardSourceParam (upval), p2 (copy), UseAppPolicyResult1 (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
 		Callback()
 		local Url = nil
 		local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
@@ -73,9 +75,14 @@ return function(p1, Callback, p2) --[[ Line: 32 | Named "useFlyoutItemNavigation
 				end
 			elseif Context.appUri then
 				local AppUri = Context.appUri
-				Default:isURLRegistered(AppUri):andThen(function(Result) --[[ Line: 95 ]]
-					-- upvalues: Default (upval), AppUri (copy)
+				Default:isURLRegistered(AppUri):andThen(function(Result) --[[ Line: 97 ]]
+					-- upvalues: Default (upval), AppUri (copy), DeepLinkSource (upval)
 					if Result then
+						if Default:isInternalDlicEnabled() then
+							Default:detectDeeplinkIntent((Default:createInternalDlic(AppUri, DeepLinkSource.LuaInternal)))
+							
+							return
+						end
 						Default:detectURL(AppUri)
 					end
 				end)

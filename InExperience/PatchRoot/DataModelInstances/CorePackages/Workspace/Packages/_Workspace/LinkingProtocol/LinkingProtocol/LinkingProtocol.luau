@@ -40,20 +40,18 @@ function LinkingProtocolModule:getUID() --[[ Line: 70 ]]
 	end) else PromiseModule.resolve("")
 end
 
-function LinkingProtocolModule:detectURL(Url) --[[ Line: 89 ]]
+function LinkingProtocolModule:detectURL(Url) --[[ Line: 90 ]]
 	-- upvalues: LinkingService (copy)
 	LinkingService:DetectUrl(Url)
 end
 
-function LinkingProtocolModule:isInternalDlicEnabled() --[[ Line: 96 ]]
+function LinkingProtocolModule:isInternalDlicEnabled() --[[ Line: 97 ]]
 	return self._getEngineFeature("EnableDLICInternalIngressSeeding")
 end
 
-function LinkingProtocolModule:createInternalDlic(p1, p2) --[[ Line: 107 ]]
+function LinkingProtocolModule:createInternalDlic(p1, p2) --[[ Line: 108 ]]
 	-- upvalues: LinkingService (copy)
-	local InternalDlic = LinkingService:CreateInternalDlic(p1, p2)
-	
-	return if InternalDlic == nil or InternalDlic == "" then nil else InternalDlic
+	return LinkingService:CreateInternalDlic(p1, p2)
 end
 
 function LinkingProtocolModule:detectDeeplinkIntent(p1) --[[ Line: 118 ]]
@@ -107,35 +105,35 @@ function LinkingProtocolModule:openURL(Url) --[[ Line: 205 ]]
 	end)
 end
 
-function LinkingProtocolModule:isURLRegistered(Url) --[[ Line: 238 ]]
+function LinkingProtocolModule:isURLRegistered(Url) --[[ Line: 234 ]]
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 239 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 235 ]]
 		-- upvalues: LinkingService (upval), Url (copy)
 		Callback(LinkingService:IsUrlRegistered(Url))
 	end)
 end
 
-function LinkingProtocolModule:getAndClearLastPendingURL() --[[ Line: 253 ]]
+function LinkingProtocolModule:getAndClearLastPendingURL() --[[ Line: 249 ]]
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 260 ]]
+	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 256 ]]
 		-- upvalues: LinkingService (upval)
 		Callback(LinkingService:GetAndClearLastPendingUrl())
 	end) else PromiseModule.resolve({ hasPendingUrl = false })
 end
 
-function LinkingProtocolModule:switchToSettingsApp(p1) --[[ Line: 271 ]]
+function LinkingProtocolModule:switchToSettingsApp(p1) --[[ Line: 267 ]]
 	-- upvalues: GetFFlagEnableToSwitchToSettingsAppWithRouteLuaModule (copy), PromiseModule (copy), LinkingService (copy)
 	local Route = if GetFFlagEnableToSwitchToSettingsAppWithRouteLuaModule() then p1 else nil
 	
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 273 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 269 ]]
 		-- upvalues: LinkingService (upval), Route (copy)
 		Callback(LinkingService:SwitchToSettingsApp(Route))
 	end)
 end
 
-function LinkingProtocolModule:supportsSwitchToSettingsApp(_) --[[ Line: 285 ]]
+function LinkingProtocolModule:supportsSwitchToSettingsApp(_) --[[ Line: 281 ]]
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 286 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 282 ]]
 		-- upvalues: LinkingService (upval)
 		Callback(LinkingService:SupportsSwitchToSettingsApp())
 	end)

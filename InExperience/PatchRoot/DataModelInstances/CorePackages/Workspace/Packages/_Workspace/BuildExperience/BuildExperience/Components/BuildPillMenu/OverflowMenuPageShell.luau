@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagBuildBackButtonChevronModule = require(BuildExperience.Flags.FFlagBuildBackButtonChevron)
+local FFlagBuildAdsUiPolishModule = require(BuildExperience.Flags.FFlagBuildAdsUiPolish)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local IconButton = FoundationModule.IconButton
 local Divider = FoundationModule.Divider
@@ -13,8 +14,8 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 34 | Named "OverflowMenuPageShell" ]]
-	-- upvalues: ReactModule (copy), UseScrollPerformanceTrackerModule (copy), View (copy), IconButton (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), ScrollView (copy), Divider (copy)
+return function(p1) --[[ Line: 35 | Named "OverflowMenuPageShell" ]]
+	-- upvalues: ReactModule (copy), UseScrollPerformanceTrackerModule (copy), View (copy), IconButton (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), ScrollView (copy), Divider (copy), FFlagBuildAdsUiPolishModule (copy)
 	local TestId = p1.testId or "overflow-menu-page"
 	local UseRefResult = ReactModule.useRef(nil)
 	UseScrollPerformanceTrackerModule(p1.scrollPerformanceIntervalName or "BuildOverflowMenuPageShell", UseRefResult)
@@ -85,6 +86,7 @@ return function(p1) --[[ Line: 34 | Named "OverflowMenuPageShell" ]]
 		FooterDivider = if p1.footer == nil or p1.footerDivider == false then nil else ReactModule.createElement(Divider, { LayoutOrder = 3, testId = `{TestId}-footer-divider` }),
 		Footer = if p1.footer == nil then nil else ReactModule.createElement(View, {
 			LayoutOrder = 4,
+			ZIndex = if FFlagBuildAdsUiPolishModule then 2 else nil,
 			tag = {
 				["composition-content-body"] = true,
 				["size-full-0 auto-y"] = true

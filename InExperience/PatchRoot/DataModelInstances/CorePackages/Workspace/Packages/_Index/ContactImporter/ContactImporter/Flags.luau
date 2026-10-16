@@ -1,3 +1,1 @@
-﻿return {
-	OffPlatformFriendRequestsIXP = require(script.OffPlatformFriendRequestsIXP)
-}
+﻿return {}

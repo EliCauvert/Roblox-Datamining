@@ -16,13 +16,13 @@ local UsePropSignalModule = require(ChatUIPrimitives.Hooks.usePropSignal)
 local _ = require(script.Parent.Parent.Types)
 local ScrollingFrameProps = { BackgroundTransparency = 1 }
 
-local function getRowKey(p1) --[[ Line: 36 ]]
+local function getRowKey(p1) --[[ Line: 38 ]]
 	return p1.id
 end
 
-local function _(p1, p2) --[[ Line: 48 | Named "createItemView" ]]
+local function _(p1, p2) --[[ Line: 50 | Named "createItemView" ]]
 	-- upvalues: ViewRecyclerModule (copy), ReactModule (copy)
-	return ViewRecyclerModule.createRecyclableView(function(p3) --[[ Line: 49 ]]
+	return ViewRecyclerModule.createRecyclableView(function(p3) --[[ Line: 51 ]]
 		-- upvalues: ReactModule (upval), p2 (copy), p1 (copy)
 		return ReactModule.createElement(p2, {}, {
 			Item = ReactModule.createElement(p1, { itemSignal = p3.itemSignal })
@@ -30,38 +30,38 @@ local function _(p1, p2) --[[ Line: 48 | Named "createItemView" ]]
 	end)
 end
 
-local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 49 ]]
+local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 51 ]]
 	-- upvalues: ReactModule (copy), InlineItemFrameModule (copy), MessageInlineItemModule (copy)
 	return ReactModule.createElement(InlineItemFrameModule, {}, {
 		Item = ReactModule.createElement(MessageInlineItemModule, { itemSignal = p1.itemSignal })
 	})
 end)
-local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 49 ]]
+local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 51 ]]
 	-- upvalues: ReactModule (copy), InlineItemFrameModule (copy), TimestampItemModule (copy)
 	return ReactModule.createElement(InlineItemFrameModule, {}, {
 		Item = ReactModule.createElement(TimestampItemModule, { itemSignal = p1.itemSignal })
 	})
 end)
-local RecyclableView2 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 49 ]]
+local RecyclableView2 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 51 ]]
 	-- upvalues: ReactModule (copy), BubbleItemFrameModule (copy), MessageBubbleItemModule (copy)
 	return ReactModule.createElement(BubbleItemFrameModule, {}, {
 		Item = ReactModule.createElement(MessageBubbleItemModule, { itemSignal = p1.itemSignal })
 	})
 end)
-local RecyclableView3 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 49 ]]
+local RecyclableView3 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 51 ]]
 	-- upvalues: ReactModule (copy), BubbleItemFrameModule (copy), TimestampItemModule (copy)
 	return ReactModule.createElement(BubbleItemFrameModule, {}, {
 		Item = ReactModule.createElement(TimestampItemModule, { itemSignal = p1.itemSignal })
 	})
 end)
 
-return function(p1) --[[ Line: 64 | Named "useMessageListViewModel" ]]
+return function(p1) --[[ Line: 66 | Named "useMessageListViewModel" ]]
 	-- upvalues: ReactModule (copy), SignalsModule (copy), ProjectMessageEnvelopeModule (copy), UsePropSignalModule (copy), GroupMessagesModule (copy), SignalsReactModule (copy), RecyclableView2 (copy), RecyclableView (copy), RecyclableView3 (copy), RecyclableView1 (copy), getRowKey (copy), UseMessageListLayoutModule (copy), ViewRecyclerModule (copy), ScrollingFrameProps (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
 		-- upvalues: SignalsModule (upval), p1 (copy), ProjectMessageEnvelopeModule (upval)
 		local t = {}
 		
-		return SignalsModule.createComputed(function(p2) --[[ Line: 67 ]]
+		return SignalsModule.createComputed(function(p2) --[[ Line: 69 ]]
 			-- upvalues: p1 (upval), t (ref), ProjectMessageEnvelopeModule (upval)
 			local t1 = {}
 			local List = {}
@@ -83,11 +83,11 @@ return function(p1) --[[ Line: 64 | Named "useMessageListViewModel" ]]
 	local UsePropSignalModuleResult = UsePropSignalModule(p1.maxGroupSize)
 	local UsePropSignalModuleResult1 = UsePropSignalModule(p1.maxGroupGapMs)
 	local UsePropSignalModuleResult2 = UsePropSignalModule(p1.groupingEnabled)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 94 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 96 ]]
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), UsePropSignalModuleResult2 (copy), GroupMessagesModule (upval), UsePropSignalModuleResult (copy), UsePropSignalModuleResult1 (copy)
 		local t = {}
 		
-		return SignalsModule.createComputed(function(p2) --[[ Line: 96 ]]
+		return SignalsModule.createComputed(function(p2) --[[ Line: 98 ]]
 			-- upvalues: UseMemoResult (upval), UsePropSignalModuleResult2 (upval), GroupMessagesModule (upval), t (ref), UsePropSignalModuleResult (upval), UsePropSignalModuleResult1 (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
 			local UngroupedRowsResult = if UsePropSignalModuleResult2(p2) == false then GroupMessagesModule.ungroupedRows(UseMemoResultResult, t) else GroupMessagesModule.groupMessages(UseMemoResultResult, UsePropSignalModuleResult(p2), UsePropSignalModuleResult1(p2), t)
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 64 | Named "useMessageListViewModel" ]]
 		UsePropSignalModuleResult1,
 		UsePropSignalModuleResult2
 	})))
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 114 ]]
 		-- upvalues: p1 (copy), RecyclableView2 (upval), RecyclableView (upval), RecyclableView3 (upval), RecyclableView1 (upval)
 		if p2.kind == "message" then
 			if p1.displayMode == "bubble" then
@@ -122,14 +122,14 @@ return function(p1) --[[ Line: 64 | Named "useMessageListViewModel" ]]
 		end
 		error("Invalid row kind: " .. p2.kind)
 	end, { p1.displayMode })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 136 ]]
 		-- upvalues: UseSignalStateResult (copy), getRowKey (upval)
 		return { items = UseSignalStateResult, getItemKey = getRowKey }
 	end, { UseSignalStateResult })
 	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule()
 	
 	return {
-		listProps = ReactModule.useMemo(function() --[[ Line: 146 ]]
+		listProps = ReactModule.useMemo(function() --[[ Line: 148 ]]
 			-- upvalues: ViewRecyclerModule (upval), ScrollingFrameProps (upval), UseMemoResult1 (copy), UseMessageListLayoutModuleResult (copy), UseResult (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create())
 			Copy.scrollingFrameProps = ScrollingFrameProps

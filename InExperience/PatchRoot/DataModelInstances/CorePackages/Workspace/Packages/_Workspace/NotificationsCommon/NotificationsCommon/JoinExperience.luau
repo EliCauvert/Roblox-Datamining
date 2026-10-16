@@ -1,25 +1,62 @@
 ﻿local Parent = script.Parent.Parent
-local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local LinkingProtocolModule = require(Parent.LinkingProtocol)
+local DeepLinkSource = LinkingProtocolModule.Enums.DeepLinkSource
+local Default = LinkingProtocolModule.LinkingProtocol.default
 local IsSubjectToDesktopPoliciesFunction = require(Parent.SharedFlags).isSubjectToDesktopPolicies
 
-return function(p1, p2) --[[ Line: 10 ]]
-	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
-	return pcall(function() --[[ Line: 11 ]]
-		-- upvalues: p2 (copy), IsSubjectToDesktopPoliciesFunction (upval), Default (upval), p1 (copy)
-		if p2 and not IsSubjectToDesktopPoliciesFunction() then
-			game:Shutdown()
+return function(p1, p2) --[[ Line: 12 ]]
+	-- upvalues: Default (copy), DeepLinkSource (copy), IsSubjectToDesktopPoliciesFunction (copy)
+	return pcall(function() --[[ Line: 13 ]]
+		-- upvalues: p2 (copy), Default (upval), p1 (copy), DeepLinkSource (upval), IsSubjectToDesktopPoliciesFunction (upval)
+		if not p2 then
+			Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 51 ]]
+				-- upvalues: Default (upval), p1 (upval), DeepLinkSource (upval)
+				if not Result then return end
+				if Default:isInternalDlicEnabled() then
+					Default:detectDeeplinkIntent((Default:createInternalDlic(p1, DeepLinkSource.LuaInternal)))
+					
+					return
+				else
+					Default:detectURL(p1)
+				end
+			end)
+			
+			return
 		end
-		Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 15 ]]
-			-- upvalues: Default (upval), p1 (upval), p2 (upval)
-			if Result then
-				Default:detectURL(p1)
-				
-				return
-			end
-			if p2 then
+		if Default:isInternalDlicEnabled() then
+			local InternalDlic = Default:createInternalDlic(p1, DeepLinkSource.LuaInternal)
+			
+			if not IsSubjectToDesktopPoliciesFunction() then
 				game:Shutdown()
-				Default:detectURL(p1)
 			end
-		end)
+			Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 21 ]]
+				-- upvalues: Default (upval), InternalDlic (copy)
+				if Result then
+					Default:detectDeeplinkIntent(InternalDlic)
+					
+					return
+				else
+					game:Shutdown()
+					Default:detectDeeplinkIntent(InternalDlic)
+				end
+			end)
+			
+			return
+		else
+			if not IsSubjectToDesktopPoliciesFunction() then
+				game:Shutdown()
+			end
+			Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 37 ]]
+				-- upvalues: Default (upval), p1 (upval)
+				if Result then
+					Default:detectURL(p1)
+					
+					return
+				else
+					game:Shutdown()
+					Default:detectURL(p1)
+				end
+			end)
+		end
 	end)
 end

@@ -8,17 +8,19 @@ local UseAvatarLookModule = require(Moments.Hooks.useAvatarLook)
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHost
 local _ = require(script.Parent.AvatarActionBar)
+local FFlagAXEnableUnifiedLoggingAvatarMoment = require(Parent.SharedFlags).FFlagAXEnableUnifiedLoggingAvatarMoment
 
-local function _(p1): string --[[ Line: 26 | Named "getLookThumbnail" ]]
+local function _(p1): string --[[ Line: 29 | Named "getLookThumbnail" ]]
 	return `rbxthumb://type=Look&id={p1}&w={150}&h={150}`
 end
 
-return function(Frame) --[[ Line: 36 | Named "useAvatarActionBarViewModel" ]]
-	-- upvalues: MomentContextModule (copy), UseMomentsHostFunction (copy), UseAvatarLookModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationModule (copy), LocalizationService (copy)
+return function(Frame) --[[ Line: 38 | Named "useAvatarActionBarViewModel" ]]
+	-- upvalues: MomentContextModule (copy), UseMomentsHostFunction (copy), UseAvatarLookModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationModule (copy), LocalizationService (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy)
 	local Store = MomentContextModule.useMoment().store
 	local Data = Store.getData(false)
+	local OutfitId = if Data.kind == "experience" then Data.outfitId else nil
 	local OpenAvatarLookTryOnFunction = UseMomentsHostFunction().openAvatarLookTryOn
-	local UseAvatarLookModuleResult = UseAvatarLookModule(if Data.kind == "experience" then Data.outfitId else nil)
+	local UseAvatarLookModuleResult = UseAvatarLookModule(OutfitId)
 	local UseSignalStateResult = UseSignalStateFunction(Store.getIsModerated)
 	local Look = UseAvatarLookModuleResult.look
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -39,9 +41,18 @@ return function(Frame) --[[ Line: 36 | Named "useAvatarActionBarViewModel" ]]
 		shopText = UseLocalizationResult.shop,
 		showShopButton = OpenAvatarLookTryOnFunction ~= nil,
 		isShopDisabled = UseSignalStateResult,
-		onShop = function() --[[ Line: 66 ]]
-			-- upvalues: OpenAvatarLookTryOnFunction (copy), LookId (copy)
+		onShop = function() --[[ Line: 68 ]]
+			-- upvalues: OpenAvatarLookTryOnFunction (copy), LookId (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (upval), Data (copy), OutfitId (copy)
 			if OpenAvatarLookTryOnFunction ~= nil and LookId ~= nil then
+				if FFlagAXEnableUnifiedLoggingAvatarMoment then
+					OpenAvatarLookTryOnFunction(LookId, {
+						feedItemId = Data.feedItemId,
+						feedSessionId = Data.feedSessionId,
+						outfitId = OutfitId
+					})
+					
+					return
+				end
 				OpenAvatarLookTryOnFunction(LookId)
 			end
 		end

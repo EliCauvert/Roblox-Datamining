@@ -61,7 +61,7 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 	end
 	
 	return {
-		start = function(LoginType, p4) --[[ Line: 153 ]]
+		start = function(LoginType, p4) --[[ Line: 152 ]]
 			-- upvalues: Callback (copy), P2 (copy), P3 (copy)
 			if LoginType ~= nil and LoginType ~= "" then
 				local config = {
@@ -80,7 +80,7 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 				return
 			end
 		end,
-		markTwoStepVerification = function() --[[ Line: 168 ]]
+		markTwoStepVerification = function() --[[ Line: 167 ]]
 			-- upvalues: readPendingAttempt (copy), P2 (copy), P3 (copy)
 			local PendingAttempt = readPendingAttempt()
 			

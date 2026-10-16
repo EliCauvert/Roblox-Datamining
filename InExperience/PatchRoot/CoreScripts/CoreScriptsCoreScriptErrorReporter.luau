@@ -7,12 +7,14 @@ local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ScriptContext = game:GetService("ScriptContext")
 local UserInputService = game:GetService("UserInputService")
+local CoreScriptErrorReporterUseErrorHandler = game:DefineFastFlag("CoreScriptErrorReporterUseErrorHandler", false)
 local RobloxGui = CoreGui.RobloxGui
 local RateLimiterModule = require(RobloxGui.Modules.ErrorReporting.RateLimiter)
 local PiiFilterModule = require(RobloxGui.Modules.ErrorReporting.PiiFilter)
 local LuaCoreScriptsErrorV2CounterConfigModule = require(RobloxGui.Modules.ErrorReporting.LuaCoreScriptsErrorV2CounterConfig)
 local CreateCoreScriptErrorHandlerModule = require(RobloxGui.Modules.ErrorReporting.createCoreScriptErrorHandler)
 local CreateCoreScriptReportProcessorModule = require(RobloxGui.Modules.ErrorReporting.createCoreScriptReportProcessor)
+local CreateCoreScriptSentryReporterModule = if CoreScriptErrorReporterUseErrorHandler then require(RobloxGui.Modules.ErrorReporting.createCoreScriptSentryReporter) else nil
 local FFlagCoreScriptErrorReporterIncludeScriptContextModule = require(RobloxGui.Modules.Flags.FFlagCoreScriptErrorReporterIncludeScriptContext)
 local BacktraceReporter = require(CorePackages.Workspace.Packages.ErrorReporters).BacktraceReporter
 local Default = require(CorePackages.Workspace.Packages.LoggingProtocol).default
@@ -27,47 +29,72 @@ game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitCount", 5)
 game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod", 60)
 game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths", 10)
 game:DefineFastInt("CoreScriptBacktraceErrorReportPercentage", 100)
-local CoreScriptErrorReporterUseErrorHandler = game:DefineFastFlag("CoreScriptErrorReporterUseErrorHandler", false)
+local CoreScriptSentryDsn = game:DefineFastString("CoreScriptSentryDsn", "")
+local CoreScriptSentryRolloutPercentage: number = game:DefineFastInt("CoreScriptSentryRolloutPercentage", 0)
 
-local function _(): boolean --[[ Line: 55 | Named "CanReportCoreScriptBacktrace" ]]
+local function _(): boolean --[[ Line: 61 | Named "CanReportCoreScriptBacktrace" ]]
 	return math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100)
 end
 
-local IsRandomValueBelow: boolean = not game:GetFastFlag("DisableCorescriptBacktraceReporting") and (game:GetFastString("CoreScriptBacktraceErrorUploadToken") ~= "" and math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100))
+local _ = function(): boolean --[[ Line: 65 | Named "CanReportCoreScriptSentry" ]]
+	-- upvalues: CoreScriptSentryRolloutPercentage (copy)
+	return math.random(1, 100) <= math.clamp(CoreScriptSentryRolloutPercentage, 0, 100)
+end
 
-if IsRandomValueBelow and CoreScriptErrorReporterUseErrorHandler then
+local IsRandomValueBelow: boolean = not game:GetFastFlag("DisableCorescriptBacktraceReporting") and (game:GetFastString("CoreScriptBacktraceErrorUploadToken") ~= "" and math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100))
+local IsRandomValueBelow1: boolean = CoreScriptErrorReporterUseErrorHandler and (CoreScriptSentryDsn ~= "" and math.random(1, 100) <= math.clamp(CoreScriptSentryRolloutPercentage, 0, 100))
+
+if CoreScriptErrorReporterUseErrorHandler and (IsRandomValueBelow or IsRandomValueBelow1) then
 	local CoreScriptReportProcessorModule, CoreScriptReportProcessorModule2 = CreateCoreScriptReportProcessorModule()
+	local NewPiiFilter = PiiFilterModule.new({
+		eraseTimeout = game:GetFastInt("CoreScriptBacktracePIIFilterEraseTimeoutSeconds")
+	})
+	local NewRateLimiter = if game:GetFastFlag("CoreScriptBacktraceRepeatedErrorRateLimiting") then RateLimiterModule.new({
+		period = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod"),
+		threshold = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitCount"),
+		processInterval = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths") / 10
+	}) else nil
 	local NewSessionWithErrorReporter = SessionWithErrorReporter.new(LuaCoreScriptsSessionWithErrorConfigModule, 300, nil)
+	local List = {}
+	
+	if IsRandomValueBelow then
+		table.insert(List, BacktraceReporter.new({
+			httpService = HttpService,
+			token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
+			processErrorReportMethod = CoreScriptReportProcessorModule
+		}))
+	end
+	if IsRandomValueBelow1 then
+		local CoreScriptSentryReporterModule = CreateCoreScriptSentryReporterModule({
+			dsn = CoreScriptSentryDsn,
+			processErrorReportMethod = CoreScriptReportProcessorModule
+		})
+		
+		if CoreScriptSentryReporterModule ~= nil then
+			table.insert(List, CoreScriptSentryReporterModule)
+		end
+	end
 	local CoreScriptErrorHandlerModule = CreateCoreScriptErrorHandlerModule({
-		piiFilter = PiiFilterModule.new({
-			eraseTimeout = game:GetFastInt("CoreScriptBacktracePIIFilterEraseTimeoutSeconds")
-		}),
-		rateLimiter = if game:GetFastFlag("CoreScriptBacktraceRepeatedErrorRateLimiting") then RateLimiterModule.new({
-			period = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod"),
-			threshold = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitCount"),
-			processInterval = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths") / 10
-		}) else nil,
-		reporters = {
-			(BacktraceReporter.new({
-				httpService = HttpService,
-				token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-				processErrorReportMethod = CoreScriptReportProcessorModule
-			}))
-		},
-		onErrorReported = function() --[[ Line: 94 ]]
+		piiFilter = NewPiiFilter,
+		rateLimiter = NewRateLimiter,
+		reporters = List,
+		onErrorReported = function() --[[ Line: 127 ]]
 			-- upvalues: Default (copy), LuaCoreScriptsErrorV2CounterConfigModule (copy), NewSessionWithErrorReporter (copy)
 			Default:logRobloxTelemetryCounter(LuaCoreScriptsErrorV2CounterConfigModule, 1)
 			NewSessionWithErrorReporter:reportEvent(1, nil, "ERROR")
 		end
 	})
-	ScriptContext.ErrorDetailed:Connect(function(...) --[[ Line: 101 ]]
-		-- upvalues: CoreScriptErrorHandlerModule (copy)
-		local Success, Result = pcall(CoreScriptErrorHandlerModule, ...)
-		
-		if not Success then
-			warn(("CoreScript error reporter failed to handle an error:\n%s"):format(Result))
-		end
-	end)
+	
+	if #List > 0 then
+		ScriptContext.ErrorDetailed:Connect(function(...) --[[ Line: 137 ]]
+			-- upvalues: CoreScriptErrorHandlerModule (copy)
+			local Success, Result = pcall(CoreScriptErrorHandlerModule, ...)
+			
+			if not Success then
+				warn(("CoreScript error reporter failed to handle an error:\n%s"):format(Result))
+			end
+		end)
+	end
 	CoreScriptReportProcessorModule2.ServerVersion = RobloxReplicatedStorage:WaitForChild("GetServerVersion", 1e999):InvokeServer()
 end
 if IsRandomValueBelow and not CoreScriptErrorReporterUseErrorHandler then
@@ -92,7 +119,7 @@ if IsRandomValueBelow and not CoreScriptErrorReporterUseErrorHandler then
 	local NewBacktraceReporter = BacktraceReporter.new({
 		httpService = HttpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p1) --[[ Line: 140 ]]
+		processErrorReportMethod = function(p1) --[[ Line: 177 ]]
 			-- upvalues: config (copy), Players (copy), RunService (copy)
 			p1:addAttributes(config)
 			p1:addAttributes({ PlayerCount = #Players:GetPlayers() })
@@ -102,7 +129,7 @@ if IsRandomValueBelow and not CoreScriptErrorReporterUseErrorHandler then
 		end
 	})
 	
-	local function handleErrorDetailed(p1, p2, Object, p3) --[[ Line: 161 ]]
+	local function handleErrorDetailed(p1, p2, Object, p3) --[[ Line: 198 ]]
 		-- upvalues: CoreGui (copy), CorePackages (copy), FFlagCoreScriptErrorReporterIncludeScriptContextModule (copy), ScriptContext (copy), ReactModule (copy), NewPiiFilter (copy), CoreScriptBacktraceRepeatedErrorRateLimitingFastFlag (copy), NewRateLimiter (ref), NewBacktraceReporter (copy), Default (copy), LuaCoreScriptsErrorV2CounterConfigModule (copy), NewSessionWithErrorReporter1 (copy)
 		if Object ~= nil and (Object:IsDescendantOf(CoreGui) or Object:IsDescendantOf(CorePackages) or FFlagCoreScriptErrorReporterIncludeScriptContextModule and Object:IsA("CoreScript") and Object:IsDescendantOf(ScriptContext)) then
 			local Unstable_parseReactErrorResult, Unstable_parseReactErrorResult2 = ReactModule.unstable_parseReactError(p1)
@@ -125,7 +152,7 @@ if IsRandomValueBelow and not CoreScriptErrorReporterUseErrorHandler then
 		end
 	end
 	
-	ScriptContext.ErrorDetailed:Connect(function(...) --[[ Line: 214 ]]
+	ScriptContext.ErrorDetailed:Connect(function(...) --[[ Line: 251 ]]
 		-- upvalues: handleErrorDetailed (copy)
 		local Success, Result = pcall(handleErrorDetailed, ...)
 		

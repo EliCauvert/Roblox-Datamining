@@ -14,6 +14,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local IconSize = Enums.IconSize
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShopItemFooterModule = require(InExperienceShop.Components.ShopItemFooter)
+local UseGamePassTrialRedemptionModule = require(InExperienceShop.Hooks.useGamePassTrialRedemption)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local SHOPITEMMEDIAHEIGHTSCALE = require(InExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
 local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
@@ -31,7 +32,7 @@ local config = {
 	trial = "Feature.InExperienceShop.Label.Trial"
 }
 
-local function TrialBadge() --[[ Line: 72 ]]
+local function TrialBadge() --[[ Line: 73 ]]
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Badge (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
@@ -44,7 +45,7 @@ local function TrialBadge() --[[ Line: 72 ]]
 	})
 end
 
-local function FreeTrialLabel(Frame) --[[ Line: 84 ]]
+local function FreeTrialLabel(Frame) --[[ Line: 85 ]]
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "auto-xy",
@@ -54,15 +55,15 @@ local function FreeTrialLabel(Frame) --[[ Line: 84 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 96 | Named "ShopItemTile" ]]
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+return ReactModule.memo(function(Frame) --[[ Line: 97 | Named "ShopItemTile" ]]
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1) --[[ Line: 103 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1) --[[ Line: 104 ]]
 		-- upvalues: UseSignalStateResult (copy), Frame (copy)
 		return UseSignalStateResult.getOwnership(p1)[Frame.itemId]
 	end)
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function() --[[ Line: 108 ]]
 		-- upvalues: Frame (copy), UseSignalStateResult (copy)
 		if Frame.itemType == "GamePass" then
 			UseSignalStateResult.fetchGamePassOwnership(Frame.itemId)
@@ -72,17 +73,18 @@ return ReactModule.memo(function(Frame) --[[ Line: 96 | Named "ShopItemTile" ]]
 		Frame.itemType,
 		UseSignalStateResult.fetchGamePassOwnership
 	})
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p1): boolean --[[ Line: 113 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p1): boolean --[[ Line: 114 ]]
 		-- upvalues: UseSignalStateResult (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (upval), Frame (copy)
 		local Available = UseSignalStateResult.getTrialAvailabilities(p1).available
 		
 		return if FFlagLuaAppEnableGamePassFreeTrialsModule and Frame.itemType == "GamePass" then Available[Frame.itemId] == true else false
 	end)
 	local NoUseSignalStateResult1: boolean = FFlagLuaAppEnableGamePassFreeTrialsModule and (UseSignalStateResult2 and not UseSignalStateResult1)
-	ReactModule.useEffect(function() --[[ Line: 125 ]]
+	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId)
+	ReactModule.useEffect(function() --[[ Line: 128 ]]
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
-			task.defer(function() --[[ Line: 130 ]]
+			task.defer(function() --[[ Line: 133 ]]
 				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
 				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = require(Parent.AvatarExperienceAnalytics).addUnifiedEventLogging
 				local ItemType = require(InExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(Frame.itemType)
@@ -117,7 +119,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 96 | Named "ShopItemTile" ]]
 	})
 	local OnItemActivatedFunction = Frame.onItemActivated
 	local ItemType = Frame.itemType
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 175 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 178 ]]
 		-- upvalues: OnItemActivatedFunction (copy), Frame (copy), ItemType (copy)
 		if OnItemActivatedFunction then
 			OnItemActivatedFunction(Frame.itemId, ItemType)
@@ -220,6 +222,9 @@ return ReactModule.memo(function(Frame) --[[ Line: 96 | Named "ShopItemTile" ]]
 				itemType = Frame.itemType,
 				isOwned = UseSignalStateResult1,
 				showTry = UseSignalStateResult2,
+				isActionLoading = UseGamePassTrialRedemptionModuleResult.isActionLoading,
+				isActionDisabled = UseGamePassTrialRedemptionModuleResult.isActionDisabled,
+				onTryActivated = UseGamePassTrialRedemptionModuleResult.onTryActivated,
 				price = Frame.price,
 				shopPageType = Frame.shopPageType,
 				purchaseCategoryLocation = PurchaseCategoryLocation

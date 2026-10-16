@@ -7,7 +7,8 @@ return {
 		"**/launchRobuxPackagePurchase.test",
 		"**/NativePurchaseFinishedConnector.test",
 		"**/NativePurchaseFinishedConnectorFlagOff.test",
-		"**/Network.getPlayerOwns.test"
+		"**/Network.getPlayerOwns.test",
+		"**/ProductPurchaseContainerGameplayPaused.test"
 	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.UIBloxInitializer,
